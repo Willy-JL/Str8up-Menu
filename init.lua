@@ -40,11 +40,29 @@ Str8upMenu = {
     description = "Str8up Menu",
     version = "1.0",
     rootPath =  getCWD("Str8up Menu"),
-    drawWindow = false
+    drawWindow = false,
+    oldDrawWindow = false
 }
 
+-- Hack: Multiple string subindexes with . like Str8upMenu["Cheats.noClip"], thanks NonameNonumber !
+setmetatable(Str8upMenu, {
+    __index = function(table, key)
+        while key:find("%.") do
+            table = table[key:sub(1, key:find("%.")-1)]
+            key = key:sub(key:find("%.")+1)
+        end
+        return table[key]
+    end,
+    __newindex = function(table, key, value)
+        while key:find("%.") do
+            table = table[key:sub(1, key:find("%.")-1)]
+            key = key:sub(key:find("%.")+1)
+        end
+        rawset(table, key, value)
+    end
+})
 
--- Hack: Forces required lua files to reload when using hot reload
+-- Hack: Forces required lua files to reload when using hot reload, thanks Architect !
 for k, _ in pairs(package.loaded) do
     if k:match(Str8upMenu.rootPath .. "*") then
         package.loaded[k] = nil
@@ -78,11 +96,14 @@ registerForEvent("onUpdate", function(deltaTime)
 end)
 
 registerForEvent("onOverlayOpen", function()
+    Str8upMenu.oldDrawWindow = Str8upMenu.drawWindow
     Str8upMenu.drawWindow = true
+    Str8upMenu.UI.overlayOpen = true
 end)
 
 registerForEvent("onOverlayClose", function()
-    Str8upMenu.drawWindow = false
+    Str8upMenu.drawWindow = Str8upMenu.oldDrawWindow
+    Str8upMenu.UI.overlayOpen = false
 end)
 
 registerForEvent("onDraw", function()
