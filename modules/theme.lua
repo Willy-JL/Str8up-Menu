@@ -6,6 +6,8 @@ Str8upTheme = {
 
 function Str8upTheme.ApplyTheme()
 
+    ImGui.PushStyleVar(ImGuiStyleVar.WindowTitleAlign, 0.5, 0.5)
+
     ImGui.PushStyleColor(ImGuiCol.Border,                  0.99, 0.93, 0.04, 0.50)
     ImGui.PushStyleColor(ImGuiCol.Button,                  0.99, 0.93, 0.04, 0.50)
     ImGui.PushStyleColor(ImGuiCol.ButtonActive,            0.99, 0.93, 0.04, 1.00)
@@ -42,6 +44,7 @@ end
 
 function Str8upTheme.RevertTheme()
 
+    ImGui.PopStyleVar(1)
     ImGui.PopStyleColor(30)
 
 end
