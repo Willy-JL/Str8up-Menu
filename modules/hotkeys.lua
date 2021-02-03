@@ -10,6 +10,30 @@ function Str8upHotkeys.SetupHotkeys(Str8upMenu, registerHotkey)
         Str8upMenu.drawWindow = not Str8upMenu.drawWindow
     end)
 
+    registerHotkey("Str8up_Menu_List_Menu_Select", "List Menu Select (Enter)", function()
+        Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "select")
+    end)
+
+    registerHotkey("Str8up_Menu_List_Menu_Back", "List Menu Back (Backspace)", function()
+        Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "back")
+    end)
+
+    registerHotkey("Str8up_Menu_List_Menu_Up", "List Menu Up (Up Arrow)", function()
+        Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "up")
+    end)
+
+    registerHotkey("Str8up_Menu_List_Menu_Down", "List Menu Down (Down Arrow)", function()
+        Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "down")
+    end)
+
+    registerHotkey("Str8up_Menu_List_Menu_Left", "List Menu Left (Left Arrow)", function()
+        Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "left")
+    end)
+
+    registerHotkey("Str8up_Menu_List_Menu_Right", "List Menu Right (Right Arrow)", function()
+        Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "right")
+    end)
+
     registerHotkey("Str8up_Menu_Toggle_Infinite_Stamina", "Toggle Infinite Stamina", function()
         Str8upMenu.Cheats.infStamina = not Str8upMenu.Cheats.infStamina
         Str8upMenu.Cheats.updateInfStamina()

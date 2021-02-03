@@ -21,11 +21,17 @@ function Str8upData.Load()
         io.close(f)
     else
         f = io.open(Str8upData.dataPath, "w")
-        f:write("{\n    \"warps\": {\n    },\n    \"loadouts\": {\n    }\n}")
+        f:write("{\"loadouts\":{},\"warps\":{},\"clickGUI\":false}")
         io.close(f)
         f = io.open(Str8upData.dataPath, "r")
         Str8upData.json = json.decode(f:read("*all"))
         io.close(f)
+    end
+
+    -- Create missing vars for backwards compatibility
+    if Str8upData.json.clickGUI == nil then
+        Str8upData.json.clickGUI = false
+        Str8upData.Save()
     end
 
     Str8upData.warpsNames = {}

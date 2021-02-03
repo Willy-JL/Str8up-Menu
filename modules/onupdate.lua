@@ -11,6 +11,13 @@ Str8upOnUpdate = {
 
 function Str8upOnUpdate.Run(Str8upMenu, deltaTime)
 
+    if Str8upMenu.UI.popupTimeout ~= 0 then
+        Str8upMenu.UI.popupTimeout = Str8upMenu.UI.popupTimeout - deltaTime
+        if Str8upMenu.UI.popupTimeout < 0 then
+            Str8upMenu.UI.popupTimeout = 0
+        end
+    end
+
     Str8upOnUpdate.timers.t025s = Str8upOnUpdate.timers.t025s + deltaTime
     if Str8upOnUpdate.timers.t025s > 0.25 then
         Str8upOnUpdate.timers.t025s = Str8upOnUpdate.timers.t025s - 0.25
