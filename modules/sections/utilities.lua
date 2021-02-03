@@ -64,6 +64,7 @@ function Str8upUtilities.addLoadout(Str8upMenu)
     if addLoadoutName == "" then
         addLoadoutName = "New Loadout"
     end
+    addLoadoutName = addLoadoutName:gsub("%.", " ")
     addLoadoutFinalName = addLoadoutName
     i = 0
     while Str8upMenu.Data.json.loadouts[addLoadoutFinalName] do
