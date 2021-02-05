@@ -8,13 +8,13 @@ end
 
 Str8upDev = { 
     description = "Str8up Dev Component",
-    rootPath =  getCWD("Str8up Menu")
+    rootPath = getCWD("Str8up Menu")
 }
 
 
 function Str8upDev.Run(Str8upMenu)
 
-
+    Game.GetPlayer():SetWarningMessage("notifications coming soon")
 
 end
 
