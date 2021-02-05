@@ -8,7 +8,7 @@ end
 
 Str8upUI = { 
     description = "Str8up UI Component",
-    rootPath =  getCWD("Str8up Menu"),
+    rootPath = getCWD("Str8up Menu"),
     devMode = false,
     cursor = {
         submenu = "Str8up Menu",
@@ -22,7 +22,7 @@ Str8upUI = {
     menu = {
         ["Str8up Menu"] = {
             type = "section",
-            maxIndex = 6,
+            maxIndex = 7,
             ["Cheats"] = {
                 index = 1,
                 type = "section",
@@ -176,7 +176,7 @@ Str8upUI = {
             ["Vehicle"] = {
                 index = 3,
                 type = "section",
-                maxIndex = 2,
+                maxIndex = 3,
                 ["Auto Fix Vehicle"] = {
                     index = 1,
                     type = "toggle",
@@ -187,6 +187,11 @@ Str8upUI = {
                     index = 2,
                     type = "button",
                     callback = "Vehicle.fixVehicle"
+                },
+                ["Toggle Summon Mode"] = {
+                    index = 3,
+                    type = "button",
+                    callback = "Vehicle.toggleSummonMode"
                 }
             },
             ["Teleport"] = {
@@ -270,8 +275,28 @@ Str8upUI = {
                     }
                 }
             },
-            ["Utilities"] = {
+            ["Player"] = {
                 index = 5,
+                type = "section",
+                maxIndex = 3,
+                ["Undress"] = {
+                    index = 1,
+                    type = "button",
+                    callback = "Player.undress"
+                },
+                ["Toggle Bra"] = {
+                    index = 2,
+                    type = "button",
+                    callback = "Player.toggleBra"
+                },
+                ["Toggle Panties"] = {
+                    index = 3,
+                    type = "button",
+                    callback = "Player.togglePanties"
+                }
+            },
+            ["Utilities"] = {
+                index = 6,
                 type = "section",
                 maxIndex = 4,
                 ["Toggle Quest for Equip Items "] = {
@@ -322,7 +347,7 @@ Str8upUI = {
                 }
             },
             ["Settings"] = {
-                index = 6,
+                index = 7,
                 type = "section",
                 maxIndex = 1,
                 ["ClickGUI"] = {
@@ -953,7 +978,7 @@ function Str8upUI.Draw(Str8upMenu)
                         ImGui.EndTabItem()
                     end
         
-                    if ImGui.BeginTabItem("Time Warp") then
+                    if ImGui.BeginTabItem("Time") then
                         ImGui.SetWindowSize(430, 150)
                         ImGui.Spacing()
         
@@ -992,11 +1017,15 @@ function Str8upUI.Draw(Str8upMenu)
                         ImGui.SetWindowSize(430, 81)
                         ImGui.Spacing()
         
-                        if ImGui.Button("Fix Vehicle", 120, 19) then
+                        if ImGui.Button("Fix Vehicle", 115, 19) then
                             Str8upMenu.Vehicle.fixVehicle()
                         end
                         ImGui.SameLine()
-                        Str8upMenu.Vehicle.autoFixVehicle = ImGui.Checkbox("Auto Fix Vehicle (Loop)", Str8upMenu.Vehicle.autoFixVehicle)
+                        Str8upMenu.Vehicle.autoFixVehicle = ImGui.Checkbox("Auto Fix Vehicle", Str8upMenu.Vehicle.autoFixVehicle)
+                        ImGui.SameLine()
+                        if ImGui.Button("Toggle Summon Mode", 148, 19) then
+                            Str8upMenu.Vehicle.toggleSummonMode()
+                        end
         
                         ImGui.EndTabItem()
                     end
@@ -1056,8 +1085,27 @@ function Str8upUI.Draw(Str8upMenu)
         
                         ImGui.EndTabItem()
                     end
+
+                    if ImGui.BeginTabItem("Player") then
+                        ImGui.SetWindowSize(430, 81)
+                        ImGui.Spacing()
+
+                        if ImGui.Button("Undress", 133, 19) then
+                            Str8upMenu.Player.undress()
+                        end
+                        ImGui.SameLine()
+                        if ImGui.Button("Toggle Bra", 133, 19) then
+                            Str8upMenu.Player.toggleBra()
+                        end
+                        ImGui.SameLine()
+                        if ImGui.Button("Toggle Panties", 133, 19) then
+                            Str8upMenu.Player.togglePanties()
+                        end
+
+                        ImGui.EndTabItem()
+                    end
         
-                    if ImGui.BeginTabItem("Utilities") then
+                    if ImGui.BeginTabItem("Utils") then
                         ImGui.SetWindowSize(430, 154)
                         ImGui.Spacing()
         

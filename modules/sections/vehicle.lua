@@ -21,4 +21,11 @@ function Str8upVehicle.fixVehicle()
 
 end
 
+
+function Str8upVehicle.toggleSummonMode()
+
+    Game.GetVehicleSystem():ToggleSummonMode()
+
+end
+
 return Str8upVehicle

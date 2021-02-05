@@ -19,6 +19,7 @@
 --                Credits to Architect for the Fix Vehicle script                --
 --                 Credits to PerfNormBeast for the NoFall logic                 --
 --             Credits to fuegovic for the Disable Police functions              --
+--         Credits to MaximiliumM for the Undress / Underwear functions          --
 --         Credits to the CET Wiki for the Special Teleport coordinates          --
 --      Credits to ZeroBiotic (https://github.com/xray) for the warps idea       --
 --    Everything else either I made myself or is too commonly known to credit    --
@@ -69,6 +70,7 @@ Str8upMenu.Cheats    = require(Str8upMenu.rootPath .. "modules/sections/cheats")
 Str8upMenu.Time      = require(Str8upMenu.rootPath .. "modules/sections/time")
 Str8upMenu.Vehicle   = require(Str8upMenu.rootPath .. "modules/sections/vehicle")
 Str8upMenu.Teleport  = require(Str8upMenu.rootPath .. "modules/sections/teleport")
+Str8upMenu.Player    = require(Str8upMenu.rootPath .. "modules/sections/player")
 Str8upMenu.Utilities = require(Str8upMenu.rootPath .. "modules/sections/utilities")
 Str8upMenu.Dev       = require(Str8upMenu.rootPath .. "modules/sections/dev")
 Str8upMenu.UI        = require(Str8upMenu.rootPath .. "modules/ui")
