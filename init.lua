@@ -62,13 +62,6 @@ setmetatable(Str8upMenu, {
     end
 })
 
--- Hack: Forces required lua files to reload when using hot reload, thanks Architect !
-for k, _ in pairs(package.loaded) do
-    if k:match(Str8upMenu.rootPath .. "*") then
-        package.loaded[k] = nil
-    end
-end
-
 
 -- Imports
 Str8upMenu.Data      = require(Str8upMenu.rootPath .. "modules/data")
