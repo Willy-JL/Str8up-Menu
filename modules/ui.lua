@@ -833,7 +833,7 @@ function Str8upUI.Draw(Str8upMenu)
 
         if Str8upUI.pendingPopup.alive then
             ImGui.OpenPopup("Set Value")
-            if ImGui.BeginPopupModal("Set Value", true, ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse | ImGuiWindowFlags.NoCollapse) then
+            if ImGui.BeginPopupModal("Set Value", ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse | ImGuiWindowFlags.NoCollapse) then
                 ImGui.SetWindowFontScale(1.0)
                 screenX, screenY = GetDisplayResolution()
                 ImGui.SetWindowSize(260, 76)
@@ -874,7 +874,7 @@ function Str8upUI.Draw(Str8upMenu)
                 title = title:gsub("%.", "/")
                 title = title:gsub("Str8up Menu/", "")
             end
-            if ImGui.Begin(title, true, ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.AlwaysAutoResize) then
+            if ImGui.Begin(title, ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.AlwaysAutoResize) then
                 ImGui.SetWindowSize(10, 10)
                 if Str8upUI.x and Str8upUI.y and not Str8upUI.overlayOpen then
                     ImGui.SetWindowPos(Str8upUI.x, Str8upUI.y)
