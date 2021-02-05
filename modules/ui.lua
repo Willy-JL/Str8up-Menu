@@ -786,6 +786,23 @@ function Str8upUI.Draw(Str8upMenu)
         ImGui.PushStyleColor(ImGuiCol.TitleBg, 0.99, 0.93, 0.04, 0.69)
     end
 
+    if Str8upUI.devMode and not Str8upUI.menu["Str8up Menu"]["Developer"] then
+        Str8upUI.menu["Str8up Menu"].maxIndex = Str8upUI.menu["Str8up Menu"].maxIndex + 1
+        Str8upUI.menu["Str8up Menu"]["Developer"] = {
+            index = Str8upUI.menu["Str8up Menu"].maxIndex,
+            type = "section",
+            maxIndex = 1,
+            ["Run Dev Script"] = {
+                index = 1,
+                type = "button",
+                objCallback = "Dev.Run"
+            }
+        }
+    elseif not Str8upUI.devMode and Str8upUI.menu["Str8up Menu"]["Developer"] then
+        Str8upUI.menu["Str8up Menu"].maxIndex = Str8upUI.menu["Str8up Menu"].maxIndex - 1
+        Str8upUI.menu["Str8up Menu"]["Developer"] = nil
+    end
+
     -- Hack: catch errors in gui to ensure theme vars bleeding is avoided
     pcall(function()
 
@@ -1094,10 +1111,13 @@ function Str8upUI.Draw(Str8upMenu)
         
                     if Str8upUI.devMode then
                         if ImGui.BeginTabItem("Dev") then
+                            ImGui.SetWindowSize(430, 81)
                             ImGui.Spacing()
-        
-        
-        
+
+                            if ImGui.Button("Run Dev Script", 415, 19) then
+                                Str8upMenu.Dev.Run(Str8upMenu)
+                            end
+
                             ImGui.EndTabItem()
                         end
                     end

@@ -38,7 +38,7 @@ end
 
 Str8upMenu = { 
     description = "Str8up Menu",
-    version = "2.0",
+    version = "2.1",
     rootPath =  getCWD("Str8up Menu"),
     drawWindow = false,
     oldDrawWindow = false
@@ -77,6 +77,7 @@ Str8upMenu.Time      = require(Str8upMenu.rootPath .. "modules/sections/time")
 Str8upMenu.Vehicle   = require(Str8upMenu.rootPath .. "modules/sections/vehicle")
 Str8upMenu.Teleport  = require(Str8upMenu.rootPath .. "modules/sections/teleport")
 Str8upMenu.Utilities = require(Str8upMenu.rootPath .. "modules/sections/utilities")
+Str8upMenu.Dev       = require(Str8upMenu.rootPath .. "modules/sections/dev")
 Str8upMenu.UI        = require(Str8upMenu.rootPath .. "modules/ui")
 Str8upMenu.OnUpdate  = require(Str8upMenu.rootPath .. "modules/onupdate")
 Str8upMenu.Hotkeys   = require(Str8upMenu.rootPath .. "modules/hotkeys")
