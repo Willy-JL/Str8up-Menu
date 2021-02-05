@@ -8,7 +8,7 @@ end
 
 Str8upData = { 
     description = "Str8up Data Component",
-    rootPath =  getCWD("Str8up Menu")
+    rootPath = getCWD("Str8up Menu")
 }
 
 Str8upData.dataPath = Str8upData.rootPath .. "str8up_data.json"
