@@ -52,11 +52,9 @@ function Str8upCheats.updateGodMode()
             end
         end
     else
-        player = Game.GetPlayer()
-        obj = Game.GetTargetingSystem():GetLookAtObject(Game.GetPlayer(), false, false)
         ssc = Game.GetScriptableSystemsContainer()
         es = ssc:Get(CName.new('EquipmentSystem'))
-        espd = es:GetPlayerData(player)
+        espd = es:GetPlayerData(Game.GetPlayer())
         espd['GetItemInEquipSlot2'] = espd['GetItemInEquipSlot;gamedataEquipmentAreaInt32']
         for i=0,2 do
             if espd:GetItemInEquipSlot2("CardiovascularSystemCW", i).tdbid.hash == 3619482064 then
