@@ -8,6 +8,7 @@ Str8upCheats = {
     componentIDs = { "Items.LegendaryMaterial1", "Items.EpicMaterial1", "Items.RareMaterial1", "Items.UncommonMaterial1", "Items.CommonMaterial1", "Items.LegendaryMaterial2", "Items.EpicMaterial2", "Items.RareMaterial2", "Items.QuickHackLegendaryMaterial1", "Items.QuickHackEpicMaterial1", "Items.QuickHackRareMaterial1", "Items.QuickHackUncommonMaterial1" },
     itemToAdd = "Items.",
     itemAmount = 1,
+    godMode = false,
     infStamina = false,
     disablePolice = false,
     noFall = false,
@@ -36,6 +37,44 @@ function Str8upCheats.addItems()
     Str8upCheats.itemToAdd = Str8upCheats.itemToAdd:gsub("Game.AddToInventory[(]\"", "")
     Str8upCheats.itemToAdd = Str8upCheats.itemToAdd:gsub("\",1[)]", "")
     Game.AddToInventory("Items." .. Str8upCheats.itemToAdd, Str8upCheats.itemAmount)
+
+end
+
+
+function Str8upCheats.updateGodMode()
+
+    if Str8upCheats.godMode then
+        Game.GetGodModeSystem():EnableOverride(Game.GetPlayer():GetEntityID(), "Invulnerable", CName.new("SecondHeart"))
+        if Game.GetWorkspotSystem():IsActorInWorkspot(Game.GetPlayer()) then
+            veh = Game['GetMountedVehicle;GameObject'](Game.GetPlayer())
+            if veh then
+                Game.GetGodModeSystem():AddGodMode(veh:GetEntityID(), "Invulnerable", CName.new("Default"))
+            end
+        end
+    else
+        player = Game.GetPlayer()
+        obj = Game.GetTargetingSystem():GetLookAtObject(Game.GetPlayer(), false, false)
+        ssc = Game.GetScriptableSystemsContainer()
+        es = ssc:Get(CName.new('EquipmentSystem'))
+        espd = es:GetPlayerData(player)
+        espd['GetItemInEquipSlot2'] = espd['GetItemInEquipSlot;gamedataEquipmentAreaInt32']
+        for i=0,2 do
+            if espd:GetItemInEquipSlot2("CardiovascularSystemCW", i).tdbid.hash == 3619482064 then
+                hasSecondHeart = true
+            end
+        end
+        if hasSecondHeart then
+            Game.GetGodModeSystem():EnableOverride(Game.GetPlayer():GetEntityID(), "Immortal", CName.new("SecondHeart"))
+        else
+            Game.GetGodModeSystem():DisableOverride(Game.GetPlayer():GetEntityID(), CName.new("SecondHeart"))
+        end
+        if Game.GetWorkspotSystem():IsActorInWorkspot(Game.GetPlayer()) then
+            veh = Game['GetMountedVehicle;GameObject'](Game.GetPlayer())
+            if veh then
+                Game.GetGodModeSystem():ClearGodMode(veh:GetEntityID(), CName.new("Default"))
+            end
+        end
+    end
 
 end
 

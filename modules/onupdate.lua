@@ -35,6 +35,9 @@ function Str8upOnUpdate.Run(Str8upMenu, deltaTime)
         if Str8upMenu.Vehicle.autoFixVehicle then
             Str8upMenu.Vehicle.fixVehicle()
         end
+        if Str8upMenu.Cheats.godMode then
+            Str8upMenu.Cheats.updateGodMode()
+        end
     end
 
     Str8upOnUpdate.timers.t5s = Str8upOnUpdate.timers.t5s + deltaTime

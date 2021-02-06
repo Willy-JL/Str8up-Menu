@@ -26,7 +26,7 @@ Str8upUI = {
             ["Cheats"] = {
                 index = 1,
                 type = "section",
-                maxIndex = 8,
+                maxIndex = 9,
                 ["Money"] = {
                     index = 1,
                     type = "section",
@@ -89,31 +89,37 @@ Str8upUI = {
                         callback = "Cheats.addItems"
                     }
                 },
-                ["Infinite Stamina"] = {
+                ["GodMode"] = {
                     index = 4,
+                    type = "toggle",
+                    var = "Cheats.godMode",
+                    callback = "Cheats.updateGodMode"
+                },
+                ["Infinite Stamina"] = {
+                    index = 5,
                     type = "toggle",
                     var = "Cheats.infStamina",
                     callback = "Cheats.updateInfStamina"
                 },
                 ["Disable Police"] = {
-                    index = 5,
+                    index = 6,
                     type = "toggle",
                     var = "Cheats.disablePolice",
                     callback = "Cheats.updateDisablePolice"
                 },
                 ["No Fall"] = {
-                    index = 6,
+                    index = 7,
                     type = "toggle",
                     var = "Cheats.noFall"
                 },
                 ["NoClip"] = {
-                    index = 7,
+                    index = 8,
                     type = "toggle",
                     var = "Cheats.noClip",
                     callback = "Cheats.updateNoClip"
                 },
                 ["NoClip Speed"] = {
-                    index = 8,
+                    index = 9,
                     type = "int",
                     var = "Cheats.noClipSpeed",
                     min = 1,
@@ -949,7 +955,13 @@ function Str8upUI.Draw(Str8upMenu)
                             Str8upMenu.Cheats.addItems()
                         end
         
-                        Str8upMenu.Cheats.infStamina, infStaminaChanged = ImGui.Checkbox("Infinite Stamina", Str8upMenu.Cheats.infStamina)
+                        Str8upMenu.Cheats.godMode, godModeChanged = ImGui.Checkbox("GodMode", Str8upMenu.Cheats.godMode)
+                        if godModeChanged then
+                            Str8upMenu.Cheats.updateGodMode()
+                        end
+        
+                        ImGui.SameLine()
+                        Str8upMenu.Cheats.infStamina, infStaminaChanged = ImGui.Checkbox("Inf Stamina", Str8upMenu.Cheats.infStamina)
                         if infStaminaChanged then
                             Str8upMenu.Cheats.updateInfStamina()
                         end
