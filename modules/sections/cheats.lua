@@ -13,7 +13,15 @@ Str8upCheats = {
     disablePolice = false,
     noFall = false,
     noClip = false,
-    noClipSpeed = 1
+    noClipSpeed = 1,
+    noClipControls = {
+        forward = false,
+        backward = false,
+        left = false,
+        right = false,
+        up = false,
+        down = false
+    }
 }
 
 

@@ -57,6 +57,27 @@ function Str8upOnUpdate.Run(Str8upMenu, deltaTime)
         end
     end
 
+    if Str8upMenu.Cheats.noClip then
+        if Str8upMenu.Cheats.noClipControls.forward then
+            Str8upMenu.Cheats.noClipTp("forward")
+        end
+        if Str8upMenu.Cheats.noClipControls.backward then
+            Str8upMenu.Cheats.noClipTp("backward")
+        end
+        if Str8upMenu.Cheats.noClipControls.left then
+            Str8upMenu.Cheats.noClipTp("left")
+        end
+        if Str8upMenu.Cheats.noClipControls.right then
+            Str8upMenu.Cheats.noClipTp("right")
+        end
+        if Str8upMenu.Cheats.noClipControls.up then
+            Str8upMenu.Cheats.noClipTp("up")
+        end
+        if Str8upMenu.Cheats.noClipControls.down then
+            Str8upMenu.Cheats.noClipTp("down")
+        end
+    end
+
 end
 
 return Str8upOnUpdate

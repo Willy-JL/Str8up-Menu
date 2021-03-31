@@ -4,7 +4,7 @@ Str8upHotkeys = {
 }
 
 
-function Str8upHotkeys.SetupHotkeys(Str8upMenu, registerHotkey)
+function Str8upHotkeys.SetupHotkeys(Str8upMenu, registerHotkey, registerInput)
 
     registerHotkey("Str8up_Menu_Toggle_GUI", "Toggle GUI", function()
         Str8upMenu.drawWindow = not Str8upMenu.drawWindow
@@ -65,28 +65,28 @@ function Str8upHotkeys.SetupHotkeys(Str8upMenu, registerHotkey)
         end
     end)
 
-    registerHotkey("Str8up_Menu_NoClip_Forward", "Noclip Forward (W)", function()
-        Str8upMenu.Cheats.noClipTp("forward")
+    registerInput("Str8up_Menu_NoClip_Forward", "Noclip Forward (W)", function(isDown)
+        Str8upMenu.Cheats.noClipControls.forward = isDown
     end)
 
-    registerHotkey("Str8up_Menu_NoClip_Backward", "Noclip Backward (S)", function()
-        Str8upMenu.Cheats.noClipTp("backward")
+    registerInput("Str8up_Menu_NoClip_Backward", "Noclip Backward (S)", function(isDown)
+        Str8upMenu.Cheats.noClipControls.backward = isDown
     end)
 
-    registerHotkey("Str8up_Menu_NoClip_Left", "Noclip Left (A)", function()
-        Str8upMenu.Cheats.noClipTp("left")
+    registerInput("Str8up_Menu_NoClip_Left", "Noclip Left (A)", function(isDown)
+        Str8upMenu.Cheats.noClipControls.left = isDown
     end)
 
-    registerHotkey("Str8up_Menu_NoClip_Right", "Noclip Right (D)", function()
-        Str8upMenu.Cheats.noClipTp("right")
+    registerInput("Str8up_Menu_NoClip_Right", "Noclip Right (D)", function(isDown)
+        Str8upMenu.Cheats.noClipControls.right = isDown
     end)
 
-    registerHotkey("Str8up_Menu_NoClip_Up", "Noclip Up (Space)", function()
-        Str8upMenu.Cheats.noClipTp("up")
+    registerInput("Str8up_Menu_NoClip_Up", "Noclip Up (Space)", function(isDown)
+        Str8upMenu.Cheats.noClipControls.up = isDown
     end)
 
-    registerHotkey("Str8up_Menu_NoClip_Down", "Noclip Down (Shift)", function()
-        Str8upMenu.Cheats.noClipTp("down")
+    registerInput("Str8up_Menu_NoClip_Down", "Noclip Down (Shift)", function(isDown)
+        Str8upMenu.Cheats.noClipControls.down = isDown
     end)
 
     registerHotkey("Str8up_Menu_Toggle_Stop_Time", "Toggle Stop Time", function()
