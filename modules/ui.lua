@@ -369,19 +369,19 @@ Str8upUI = {
 
 -- Hack: Multiple string subindexes with . like Str8upMenu["Cheats.noClip"], thanks NonameNonumber !
 setmetatable(Str8upUI.menu, {
-    __index = function(table, key)
+    __index = function(the_table, key)
         while key:find("%.") do
-            table = table[key:sub(1, key:find("%.")-1)]
+            the_table = rawget(the_table, key:sub(1, key:find("%.")-1))
             key = key:sub(key:find("%.")+1)
         end
-        return table[key]
+        return rawget(the_table, key)
     end,
-    __newindex = function(table, key, value)
+    __newindex = function(the_table, key, value)
         while key:find("%.") do
-            table = table[key:sub(1, key:find("%.")-1)]
+            the_table = rawget(the_table, key:sub(1, key:find("%.")-1))
             key = key:sub(key:find("%.")+1)
         end
-        rawset(table, key, value)
+        rawset(the_table, key, value)
     end
 })
 
@@ -583,7 +583,7 @@ function Str8upUI.DrawCursorRect(name)
     -- if not Str8upUI.overlayOpen and not Str8upUI.pendingPopup.alive and Str8upUI.popupTimeout == 0 then
     --     ImGui.SetNextWindowFocus()
     -- end
-    ImGui.Begin(name .. ".Cursor", true, ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoResize)
+    ImGui.Begin(name .. ".Cursor", true, bit32.bor(ImGuiWindowFlags.NoTitleBar, ImGuiWindowFlags.NoMove, ImGuiWindowFlags.NoScrollbar, ImGuiWindowFlags.AlwaysAutoResize, ImGuiWindowFlags.NoResize))
     ImGui.End()
     ImGui.PopStyleColor(2)
 
@@ -839,7 +839,7 @@ function Str8upUI.Draw(Str8upMenu)
 
         if Str8upUI.pendingPopup.alive then
             ImGui.OpenPopup("Set Value")
-            if ImGui.BeginPopupModal("Set Value", ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse | ImGuiWindowFlags.NoCollapse) then
+            if ImGui.BeginPopupModal("Set Value", bit32.bor(ImGuiWindowFlags.NoResize, ImGuiWindowFlags.NoScrollbar, ImGuiWindowFlags.NoScrollWithMouse, ImGuiWindowFlags.NoCollapse)) then
                 ImGui.SetWindowFontScale(1.0)
                 screenX, screenY = GetDisplayResolution()
                 ImGui.SetWindowSize(260, 76)
@@ -853,7 +853,7 @@ function Str8upUI.Draw(Str8upMenu)
                 if Str8upUI.pendingPopup.type == "text" then
                     Str8upMenu[Str8upUI.pendingPopup.var], popupConfirmed = ImGui.InputText("", Str8upMenu[Str8upUI.pendingPopup.var], 100, ImGuiInputTextFlags.EnterReturnsTrue)
                 elseif Str8upUI.pendingPopup.type == "int" then
-                    popupOutput, popupConfirmed = ImGui.InputText("", tostring(Str8upMenu[Str8upUI.pendingPopup.var]), 100, ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.CharsDecimal)
+                    popupOutput, popupConfirmed = ImGui.InputText("", tostring(Str8upMenu[Str8upUI.pendingPopup.var]), 100, bit32.bor(ImGuiInputTextFlags.EnterReturnsTrue, ImGuiInputTextFlags.CharsDecimal))
                     if popupOutput == "" then
                         popupOutput = Str8upUI.pendingPopup.min
                     end
@@ -880,7 +880,7 @@ function Str8upUI.Draw(Str8upMenu)
                 title = title:gsub("%.", "/")
                 title = title:gsub("Str8up Menu/", "")
             end
-            if ImGui.Begin(title, ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.AlwaysAutoResize) then
+            if ImGui.Begin(title, bit32.bor(ImGuiWindowFlags.NoResize, ImGuiWindowFlags.NoScrollbar, ImGuiWindowFlags.NoScrollWithMouse, ImGuiWindowFlags.NoCollapse, ImGuiWindowFlags.AlwaysAutoResize)) then
                 ImGui.SetWindowSize(10, 10)
                 if Str8upUI.x and Str8upUI.y and not Str8upUI.overlayOpen then
                     ImGui.SetWindowPos(Str8upUI.x, Str8upUI.y)

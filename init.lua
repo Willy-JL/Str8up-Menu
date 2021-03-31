@@ -47,19 +47,19 @@ Str8upMenu = {
 
 -- Hack: Multiple string subindexes with . like Str8upMenu["Cheats.noClip"], thanks NonameNonumber !
 setmetatable(Str8upMenu, {
-    __index = function(table, key)
+    __index = function(the_table, key)
         while key:find("%.") do
-            table = table[key:sub(1, key:find("%.")-1)]
+            the_table = rawget(the_table, key:sub(1, key:find("%.")-1))
             key = key:sub(key:find("%.")+1)
         end
-        return table[key]
+        return rawget(the_table, key)
     end,
-    __newindex = function(table, key, value)
+    __newindex = function(the_table, key, value)
         while key:find("%.") do
-            table = table[key:sub(1, key:find("%.")-1)]
+            the_table = rawget(the_table, key:sub(1, key:find("%.")-1))
             key = key:sub(key:find("%.")+1)
         end
-        rawset(table, key, value)
+        rawset(the_table, key, value)
     end
 })
 
@@ -83,7 +83,7 @@ Str8upMenu.Data.Load()
 
 
 -- Hotkeys
-Str8upMenu.Hotkeys.SetupHotkeys(Str8upMenu, registerHotkey)
+Str8upMenu.Hotkeys.SetupHotkeys(Str8upMenu, registerHotkey, registerInput)
 
 
 -- Events
