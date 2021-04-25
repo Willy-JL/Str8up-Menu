@@ -1,5 +1,5 @@
 
-Str8upTime = { 
+Str8upTime = {
     description = "Str8up Time Component",
     h = 0,
     m = 0,

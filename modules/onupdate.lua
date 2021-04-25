@@ -1,5 +1,5 @@
 
-Str8upOnUpdate = { 
+Str8upOnUpdate = {
     description = "Str8up OnUpdate Component",
     timers = {
         t025s = 0,

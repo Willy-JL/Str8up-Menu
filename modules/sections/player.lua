@@ -1,5 +1,5 @@
 
-Str8upPlayer = { 
+Str8upPlayer = {
     description = "Str8up Player Component"
 }
 

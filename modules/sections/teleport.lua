@@ -1,5 +1,5 @@
 
-Str8upTeleport = { 
+Str8upTeleport = {
     description = "Str8up Teleport Component",
     specialTpSelection = 0,
     specialTpNames = { "Akulov penthouse", "Peralezes Apt", "Gutierrez Apt", "Time Machine Guitar room", "Denny's Estate Inside", "Hanako Estate bedroom", "Voodoo Boys Subway", "Slayton Apt", "NCPD Conference room", "JigJig St hotel room", "Dark Matter hotel room", "Megatower H8 penthouse", "Outside the city (Nomad starting)", "V's Mansion", "Grand Imperial Plaza Mall", "Unfinished Casino", "VB Data Fortress", "River BD School", "Monorail Tunnel", "Konpeki Tower", "Konpeki Tower - V Suite", "Clouds", "Embers", "Badlands Tunnel", "Badlands Tunnel Entrance", "Petrochem Off-limits area", "Arasaka Tower Abandoned area", "Arasaka Tower Jungle", "Arasaka Tower Upper Atrium", "Arasaka Tower CEO level", "Arasaka Tower CEO office", "Arasaka Tower Unlisted levels", "Arasaka Tower Unlisted temple", "Arasaka Tower Counter-intel", "Arasaka Tower Underground", "Arasaka Tower Boring Machine", "Arasaka Mikoshi Mainframe", "Arasaka Orbital Station", "Johnny interrogation room" },

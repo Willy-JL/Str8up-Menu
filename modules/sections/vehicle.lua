@@ -1,5 +1,5 @@
 
-Str8upVehicle = { 
+Str8upVehicle = {
     description = "Str8up Vehicle Component",
     autoFixVehicle = false
 }

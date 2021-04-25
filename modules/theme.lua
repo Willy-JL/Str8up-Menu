@@ -1,5 +1,5 @@
 
-Str8upTheme = { 
+Str8upTheme = {
     description = "Str8up Theme Component"
 }
 

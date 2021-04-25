@@ -1,5 +1,5 @@
 
-Str8upCheats = { 
+Str8upCheats = {
     description = "Str8up Cheats Component",
     moneyToAdd = 0,
     componentAmount = 0,

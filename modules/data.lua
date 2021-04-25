@@ -6,7 +6,7 @@ function getCWD(mod_name)
 end
 
 
-Str8upData = { 
+Str8upData = {
     description = "Str8up Data Component",
     rootPath = getCWD("Str8up Menu")
 }

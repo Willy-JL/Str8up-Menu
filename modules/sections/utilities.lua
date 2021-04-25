@@ -1,5 +1,5 @@
 
-Str8upUtilities = { 
+Str8upUtilities = {
     description = "Str8up Utilities Component",
     newLoadoutName = "New Loadout",
     loadoutSelection = 0
@@ -26,7 +26,7 @@ function Str8upUtilities.toggleQuestItems()
     for k,v in pairs(slots) do
         for i=1,v do
             itemid = espd:GetItemInEquipSlot2(k, i - 1)
-            if itemid.tdbid.hash ~= 0 then 
+            if itemid.tdbid.hash ~= 0 then
                 itemdata = ts:GetItemData(player, itemid)
                 if itemdata:HasTag("Quest") then
                     itemdata:RemoveDynamicTag("Quest")

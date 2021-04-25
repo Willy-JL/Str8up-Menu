@@ -37,7 +37,7 @@ function getCWD(mod_name)
 end
 
 
-Str8upMenu = { 
+Str8upMenu = {
     description = "Str8up Menu",
     version = "2.3",
     rootPath =  getCWD("Str8up Menu"),
