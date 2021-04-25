@@ -44,7 +44,7 @@ function Str8upHotkeys.SetupHotkeys(Str8upMenu, registerHotkey, registerInput)
             elseif actionType == 'BUTTON_RELEASED' then
                 Str8upMenu.Cheats.noClipControls.up = false
             end
-        elseif actionName == 'ToggleSprint' or actionName == 'Sprint' then
+        elseif actionName == 'ToggleSprint' then
             if actionType == 'BUTTON_PRESSED' then
                 Str8upMenu.Cheats.noClipControls.down = true
             elseif actionType == 'BUTTON_RELEASED' then
