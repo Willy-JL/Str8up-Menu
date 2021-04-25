@@ -6,7 +6,7 @@ function getCWD(mod_name)
 end
 
 
-Str8upUI = { 
+Str8upUI = {
     description = "Str8up UI Component",
     rootPath = getCWD("Str8up Menu"),
     devMode = false,
@@ -445,6 +445,8 @@ function Str8upUI.ListMenuInteractions(Str8upMenu, action)
             if Str8upUI.cursor.submenu:find("%.") then
                 Str8upUI.cursor.selected = Str8upUI.cursor.submenu:sub(#Str8upUI.cursor.submenu - Str8upUI.cursor.submenu:reverse():find("%.")+2)
                 Str8upUI.cursor.submenu = Str8upUI.cursor.submenu:sub(1, #Str8upUI.cursor.submenu - Str8upUI.cursor.submenu:reverse():find("%."))
+            else
+                Str8upMenu.drawWindow = false
             end
         elseif action == "up" then
             if submenu.type == "section" then
@@ -809,7 +811,7 @@ end
 function Str8upUI.Draw(Str8upMenu)
 
     Str8upUI.Theme.ApplyTheme()
-    
+
     listThemeApplied = false
     if not Str8upMenu.Data.json.clickGUI then
         listThemeApplied = true
@@ -923,18 +925,18 @@ function Str8upUI.Draw(Str8upMenu)
             if ImGui.Begin("Str8up Menu") then
                 ImGui.SetWindowFontScale(1.0)
                 if ImGui.BeginTabBar("Tabs") then
-        
+
                     if ImGui.BeginTabItem("Cheats") then
                         ImGui.SetWindowSize(430, 173)
                         ImGui.Spacing()
-        
+
                         ImGui.PushItemWidth(150)
                         Str8upMenu.Cheats.moneyToAdd = ImGui.InputInt("##Money Amount", Str8upMenu.Cheats.moneyToAdd, 1000, 10000)
                         ImGui.SameLine(162)
                         if ImGui.Button("Add Money", 75, 19) then
                             Str8upMenu.Cheats.addMoney()
                         end
-        
+
                         ImGui.PushItemWidth(104)
                         Str8upMenu.Cheats.componentAmount = ImGui.InputInt("##Component Amount", Str8upMenu.Cheats.componentAmount, 10, 100)
                         ImGui.SameLine(116)
@@ -944,7 +946,7 @@ function Str8upUI.Draw(Str8upMenu)
                         if ImGui.Button("Add Components") then
                             Str8upMenu.Cheats.addComponents()
                         end
-        
+
                         ImGui.PushItemWidth(229)
                         Str8upMenu.Cheats.itemToAdd = ImGui.InputText("##Item Code", Str8upMenu.Cheats.itemToAdd, 100)
                         ImGui.PushItemWidth(75)
@@ -954,27 +956,27 @@ function Str8upUI.Draw(Str8upMenu)
                         if ImGui.Button("Add Items") then
                             Str8upMenu.Cheats.addItems()
                         end
-        
+
                         Str8upMenu.Cheats.godMode, godModeChanged = ImGui.Checkbox("GodMode", Str8upMenu.Cheats.godMode)
                         if godModeChanged then
                             Str8upMenu.Cheats.updateGodMode()
                         end
-        
+
                         ImGui.SameLine()
                         Str8upMenu.Cheats.infStamina, infStaminaChanged = ImGui.Checkbox("Inf Stamina", Str8upMenu.Cheats.infStamina)
                         if infStaminaChanged then
                             Str8upMenu.Cheats.updateInfStamina()
                         end
-        
+
                         ImGui.SameLine()
                         Str8upMenu.Cheats.disablePolice, disablePoliceChanged = ImGui.Checkbox("Disable Police", Str8upMenu.Cheats.disablePolice)
                         if disablePoliceChanged then
                             Str8upMenu.Cheats.updateDisablePolice()
                         end
-        
+
                         ImGui.SameLine()
                         Str8upMenu.Cheats.noFall, noFallChanged = ImGui.Checkbox("No Fall", Str8upMenu.Cheats.noFall)
-        
+
                         Str8upMenu.Cheats.noClip, noClipChanged = ImGui.Checkbox("NoClip - Speed", Str8upMenu.Cheats.noClip)
                         if noClipChanged then
                             if Str8upMenu.Cheats.noClip and Str8upMenu.Time.superHot then
@@ -986,14 +988,14 @@ function Str8upUI.Draw(Str8upMenu)
                         ImGui.SameLine()
                         ImGui.PushItemWidth(255)
                         Str8upMenu.Cheats.noClipSpeed = ImGui.SliderInt("##NoClip Speed", Str8upMenu.Cheats.noClipSpeed, 1, 20, "%dx")
-        
+
                         ImGui.EndTabItem()
                     end
-        
+
                     if ImGui.BeginTabItem("Time") then
                         ImGui.SetWindowSize(430, 150)
                         ImGui.Spacing()
-        
+
                         ImGui.PushItemWidth(50)
                         Str8upMenu.Time.h, hChanged = ImGui.DragInt("##Hours", Str8upMenu.Time.h, 0.1, 0, 23, "H: %d")
                         ImGui.SameLine(62)
@@ -1004,12 +1006,12 @@ function Str8upUI.Draw(Str8upMenu)
                         if ImGui.Button("Set Time") or hChanged or mChanged or sChanged then
                             Str8upMenu.Time.setTime()
                         end
-        
+
                         Str8upMenu.Time.stopTime, stopTimeChanged = ImGui.Checkbox("Stop Time Cycle", Str8upMenu.Time.stopTime)
                         if stopTimeChanged then
                             Str8upMenu.Time.updateStopTime()
                         end
-        
+
                         Str8upMenu.Time.superHot, superHotChanged = ImGui.Checkbox("SuperHot Mode (Time Freeze)", Str8upMenu.Time.superHot)
                         if superHotChanged then
                             if Str8upMenu.Time.superHot and Str8upMenu.Cheats.noClip then
@@ -1018,17 +1020,17 @@ function Str8upUI.Draw(Str8upMenu)
                             end
                             Str8upMenu.Time.updateSuperHot()
                         end
-        
+
                         ImGui.PushItemWidth(250)
                         Str8upMenu.Time.timeMultiplier = ImGui.SliderInt("Time Multiplier", Str8upMenu.Time.timeMultiplier, 1, 100, "%dx")
-        
+
                         ImGui.EndTabItem()
                     end
-        
+
                     if ImGui.BeginTabItem("Vehicle") then
                         ImGui.SetWindowSize(430, 81)
                         ImGui.Spacing()
-        
+
                         if ImGui.Button("Fix Vehicle", 115, 19) then
                             Str8upMenu.Vehicle.fixVehicle()
                         end
@@ -1038,14 +1040,14 @@ function Str8upUI.Draw(Str8upMenu)
                         if ImGui.Button("Toggle Summon Mode", 148, 19) then
                             Str8upMenu.Vehicle.toggleSummonMode()
                         end
-        
+
                         ImGui.EndTabItem()
                     end
-        
+
                     if ImGui.BeginTabItem("Teleport") then
                         ImGui.SetWindowSize(430, 219)
                         ImGui.Spacing()
-        
+
                         if ImGui.Button("TP to Quest", 202, 19) then
                             Str8upMenu.Teleport.tpToQuest()
                         end
@@ -1053,7 +1055,7 @@ function Str8upUI.Draw(Str8upMenu)
                         if ImGui.Button("TP to Waipoint (Coming Soon)", 202, 19) then
                             print("Not yet choom")
                         end
-        
+
                         ImGui.Spacing()
                         ImGui.Text("Special")
                         ImGui.PushItemWidth(256)
@@ -1062,7 +1064,7 @@ function Str8upUI.Draw(Str8upMenu)
                         if ImGui.Button("Teleport") then
                             Str8upMenu.Teleport.specialTp()
                         end
-        
+
                         ImGui.Text("Fast Travel Spots")
                         ImGui.PushItemWidth(154)
                         Str8upMenu.Teleport.fastTravelAreaSelection = ImGui.Combo("##Fast Travel Area", Str8upMenu.Teleport.fastTravelAreaSelection, Str8upMenu.Teleport.fastTravelAreaNames, #Str8upMenu.Teleport.fastTravelAreaNames, #Str8upMenu.Teleport.fastTravelAreaNames)
@@ -1073,7 +1075,7 @@ function Str8upUI.Draw(Str8upMenu)
                         if ImGui.Button(" Go ") then
                             Str8upMenu.Teleport.fastTravelTp()
                         end
-        
+
                         ImGui.Spacing()
                         ImGui.Spacing()
                         ImGui.Text("Custom Warps")
@@ -1094,7 +1096,7 @@ function Str8upUI.Draw(Str8upMenu)
                         if ImGui.Button("Warp To", 100, 19) then
                             Str8upMenu.Teleport.tpToWarp(Str8upMenu)
                         end
-        
+
                         ImGui.EndTabItem()
                     end
 
@@ -1116,24 +1118,24 @@ function Str8upUI.Draw(Str8upMenu)
 
                         ImGui.EndTabItem()
                     end
-        
+
                     if ImGui.BeginTabItem("Utils") then
                         ImGui.SetWindowSize(430, 154)
                         ImGui.Spacing()
-        
+
                         if ImGui.Button("Toggle Quest Item (No Sell / Dismantle) for Equipped Items") then
                             Str8upMenu.Utilities.toggleQuestItems()
                         end
-                
+
                         if ImGui.Button("Untrack Quest", 205, 19) then
                             Str8upMenu.Utilities.untrackQuest()
                         end
-                
+
                         ImGui.SameLine(217)
                         if ImGui.Button("Cancel Fall Dmg", 205, 19) then
                             Str8upMenu.Utilities.cancelFallDamage()
                         end
-                
+
                         ImGui.Spacing()
                         ImGui.Text("Custom Loadouts")
                         ImGui.SameLine(166)
@@ -1153,7 +1155,7 @@ function Str8upUI.Draw(Str8upMenu)
                         if ImGui.Button("Load", 106, 19) then
                             Str8upMenu.Utilities.loadLoadout(Str8upMenu)
                         end
-        
+
                         ImGui.EndTabItem()
                     end
 
@@ -1168,7 +1170,7 @@ function Str8upUI.Draw(Str8upMenu)
 
                         ImGui.EndTabItem()
                     end
-        
+
                     if Str8upUI.devMode then
                         if ImGui.BeginTabItem("Dev") then
                             ImGui.SetWindowSize(430, 81)
@@ -1181,7 +1183,7 @@ function Str8upUI.Draw(Str8upMenu)
                             ImGui.EndTabItem()
                         end
                     end
-        
+
                 end
                 ImGui.EndTabBar()
             end
