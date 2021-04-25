@@ -1,36 +1,114 @@
 
-Str8upHotkeys = { 
+Str8upHotkeys = {
     description = "Str8up Hotkeys Component"
 }
 
 
 function Str8upHotkeys.SetupHotkeys(Str8upMenu, registerHotkey, registerInput)
 
+    ListenerAction = GetSingleton('gameinputScriptListenerAction')
+    Observe('PlayerPuppet', 'OnAction', function(action)
+
+        actionName = Game.NameToString(ListenerAction:GetName(action))
+        actionType = ListenerAction:GetType(action).value
+        actionValue = ListenerAction:GetValue(action)
+
+        -- NoClip movement
+        if actionName == 'Forward' then
+            if actionType == 'BUTTON_PRESSED' then
+                Str8upMenu.Cheats.noClipControls.forward = true
+            elseif actionType == 'BUTTON_RELEASED' then
+                Str8upMenu.Cheats.noClipControls.forward = false
+            end
+        elseif actionName == 'Back' then
+            if actionType == 'BUTTON_PRESSED' then
+                Str8upMenu.Cheats.noClipControls.backward = true
+            elseif actionType == 'BUTTON_RELEASED' then
+                Str8upMenu.Cheats.noClipControls.backward = false
+            end
+        elseif actionName == 'Left' then
+            if actionType == 'BUTTON_PRESSED' then
+                Str8upMenu.Cheats.noClipControls.left = true
+            elseif actionType == 'BUTTON_RELEASED' then
+                Str8upMenu.Cheats.noClipControls.left = false
+            end
+        elseif actionName == 'Right' then
+            if actionType == 'BUTTON_PRESSED' then
+                Str8upMenu.Cheats.noClipControls.right = true
+            elseif actionType == 'BUTTON_RELEASED' then
+                Str8upMenu.Cheats.noClipControls.right = false
+            end
+        elseif actionName == 'Jump' then
+            if actionType == 'BUTTON_PRESSED' then
+                Str8upMenu.Cheats.noClipControls.up = true
+            elseif actionType == 'BUTTON_RELEASED' then
+                Str8upMenu.Cheats.noClipControls.up = false
+            end
+        elseif actionName == 'ToggleSprint' or actionName == 'Sprint' then
+            if actionType == 'BUTTON_PRESSED' then
+                Str8upMenu.Cheats.noClipControls.down = true
+            elseif actionType == 'BUTTON_RELEASED' then
+                Str8upMenu.Cheats.noClipControls.down = false
+            end
+
+        -- List menu controls
+        elseif actionName == 'Keyboard_0' then
+            if actionType == 'BUTTON_PRESSED' then
+                Str8upMenu.drawWindow = not Str8upMenu.drawWindow
+            end
+        elseif actionName == 'up_button' then
+            if actionType == 'BUTTON_PRESSED' then
+                Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "up")
+            end
+        elseif actionName == 'down_button' then
+            if actionType == 'BUTTON_PRESSED' then
+                Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "down")
+            end
+        elseif actionName == 'left_button' then
+            if actionType == 'BUTTON_PRESSED' then
+                Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "left")
+            end
+        elseif actionName == 'right_button' then
+            if actionType == 'BUTTON_PRESSED' then
+                Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "right")
+            end
+        elseif actionName == 'UI_Apply' then
+            if actionType == 'BUTTON_PRESSED' then
+                Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "select")
+            end
+        elseif actionName == 'Sprint' then
+            if actionType == 'BUTTON_PRESSED' then
+                Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "back")
+            end
+        end
+
+    end)
+
     registerHotkey("Str8up_Menu_Toggle_GUI", "Toggle GUI", function()
         Str8upMenu.drawWindow = not Str8upMenu.drawWindow
     end)
 
-    registerHotkey("Str8up_Menu_List_Menu_Select", "List Menu Select (Enter)", function()
+    registerHotkey("Str8up_Menu_List_Menu_Select", "List Menu Select", function()
         Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "select")
     end)
 
-    registerHotkey("Str8up_Menu_List_Menu_Back", "List Menu Back (Backspace)", function()
+    registerHotkey("Str8up_Menu_List_Menu_Back", "List Menu Back", function()
         Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "back")
     end)
 
-    registerHotkey("Str8up_Menu_List_Menu_Up", "List Menu Up (Up Arrow)", function()
+    registerHotkey("Str8up_Menu_List_Menu_Up", "List Menu Up", function()
         Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "up")
     end)
 
-    registerHotkey("Str8up_Menu_List_Menu_Down", "List Menu Down (Down Arrow)", function()
+    registerHotkey("Str8up_Menu_List_Menu_Down", "List Menu Down", function()
         Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "down")
     end)
 
-    registerHotkey("Str8up_Menu_List_Menu_Left", "List Menu Left (Left Arrow)", function()
+    registerHotkey("Str8up_Menu_List_Menu_Left", "List Menu Left", function()
         Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "left")
     end)
 
-    registerHotkey("Str8up_Menu_List_Menu_Right", "List Menu Right (Right Arrow)", function()
+    registerHotkey("Str8up_Menu_List_Menu_Right", "List Menu Right", function()
         Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "right")
     end)
 
@@ -63,30 +141,6 @@ function Str8upHotkeys.SetupHotkeys(Str8upMenu, registerHotkey, registerInput)
         if Str8upMenu.Cheats.noClipSpeed > 1 then
             Str8upMenu.Cheats.noClipSpeed = Str8upMenu.Cheats.noClipSpeed - 1
         end
-    end)
-
-    registerInput("Str8up_Menu_NoClip_Forward", "Noclip Forward (W)", function(isDown)
-        Str8upMenu.Cheats.noClipControls.forward = isDown
-    end)
-
-    registerInput("Str8up_Menu_NoClip_Backward", "Noclip Backward (S)", function(isDown)
-        Str8upMenu.Cheats.noClipControls.backward = isDown
-    end)
-
-    registerInput("Str8up_Menu_NoClip_Left", "Noclip Left (A)", function(isDown)
-        Str8upMenu.Cheats.noClipControls.left = isDown
-    end)
-
-    registerInput("Str8up_Menu_NoClip_Right", "Noclip Right (D)", function(isDown)
-        Str8upMenu.Cheats.noClipControls.right = isDown
-    end)
-
-    registerInput("Str8up_Menu_NoClip_Up", "Noclip Up (Space)", function(isDown)
-        Str8upMenu.Cheats.noClipControls.up = isDown
-    end)
-
-    registerInput("Str8up_Menu_NoClip_Down", "Noclip Down (Shift)", function(isDown)
-        Str8upMenu.Cheats.noClipControls.down = isDown
     end)
 
     registerHotkey("Str8up_Menu_Toggle_Stop_Time", "Toggle Stop Time", function()
