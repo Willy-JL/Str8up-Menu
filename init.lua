@@ -83,7 +83,7 @@ Str8upMenu.Data.Load()
 
 
 -- Hotkeys
-Str8upMenu.Hotkeys.SetupHotkeys(Str8upMenu, registerHotkey, registerInput)
+Str8upMenu.Hotkeys.SetupHotkeys(Str8upMenu, registerForEvent, Observe, registerHotkey, registerInput)
 
 
 -- Events
@@ -108,9 +108,7 @@ registerForEvent("onDraw", function()
     end
 end)
 
-registerForEvent("onInit", function(deltaTime)
-    print("Str8up Menu v" .. Str8upMenu.version .. " loaded! Configure Hotkeys from CET's overlay! ")
-end)
+print("Str8up Menu v" .. Str8upMenu.version .. " loaded! Configure Hotkeys from CET's overlay! ")
 
 
 return Str8upMenu

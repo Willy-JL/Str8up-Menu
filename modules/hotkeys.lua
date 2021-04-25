@@ -4,84 +4,87 @@ Str8upHotkeys = {
 }
 
 
-function Str8upHotkeys.SetupHotkeys(Str8upMenu, registerHotkey, registerInput)
+function Str8upHotkeys.SetupHotkeys(Str8upMenu, registerForEvent, Observe, registerHotkey, registerInput)
 
-    ListenerAction = GetSingleton('gameinputScriptListenerAction')
-    Observe('PlayerPuppet', 'OnAction', function(action)
+    registerForEvent('onInit', function()
+        ListenerAction = GetSingleton('gameinputScriptListenerAction')
 
-        actionName = Game.NameToString(ListenerAction:GetName(action))
-        actionType = ListenerAction:GetType(action).value
-        actionValue = ListenerAction:GetValue(action)
+        Observe('PlayerPuppet', 'OnAction', function(action)
 
-        -- NoClip movement
-        if actionName == 'Forward' then
-            if actionType == 'BUTTON_PRESSED' then
-                Str8upMenu.Cheats.noClipControls.forward = true
-            elseif actionType == 'BUTTON_RELEASED' then
-                Str8upMenu.Cheats.noClipControls.forward = false
-            end
-        elseif actionName == 'Back' then
-            if actionType == 'BUTTON_PRESSED' then
-                Str8upMenu.Cheats.noClipControls.backward = true
-            elseif actionType == 'BUTTON_RELEASED' then
-                Str8upMenu.Cheats.noClipControls.backward = false
-            end
-        elseif actionName == 'Left' then
-            if actionType == 'BUTTON_PRESSED' then
-                Str8upMenu.Cheats.noClipControls.left = true
-            elseif actionType == 'BUTTON_RELEASED' then
-                Str8upMenu.Cheats.noClipControls.left = false
-            end
-        elseif actionName == 'Right' then
-            if actionType == 'BUTTON_PRESSED' then
-                Str8upMenu.Cheats.noClipControls.right = true
-            elseif actionType == 'BUTTON_RELEASED' then
-                Str8upMenu.Cheats.noClipControls.right = false
-            end
-        elseif actionName == 'Jump' then
-            if actionType == 'BUTTON_PRESSED' then
-                Str8upMenu.Cheats.noClipControls.up = true
-            elseif actionType == 'BUTTON_RELEASED' then
-                Str8upMenu.Cheats.noClipControls.up = false
-            end
-        elseif actionName == 'ToggleSprint' then
-            if actionType == 'BUTTON_PRESSED' then
-                Str8upMenu.Cheats.noClipControls.down = true
-            elseif actionType == 'BUTTON_RELEASED' then
-                Str8upMenu.Cheats.noClipControls.down = false
+            actionName = Game.NameToString(ListenerAction:GetName(action))
+            actionType = ListenerAction:GetType(action).value
+            actionValue = ListenerAction:GetValue(action)
+
+            -- NoClip movement
+            if actionName == 'Forward' then
+                if actionType == 'BUTTON_PRESSED' then
+                    Str8upMenu.Cheats.noClipControls.forward = true
+                elseif actionType == 'BUTTON_RELEASED' then
+                    Str8upMenu.Cheats.noClipControls.forward = false
+                end
+            elseif actionName == 'Back' then
+                if actionType == 'BUTTON_PRESSED' then
+                    Str8upMenu.Cheats.noClipControls.backward = true
+                elseif actionType == 'BUTTON_RELEASED' then
+                    Str8upMenu.Cheats.noClipControls.backward = false
+                end
+            elseif actionName == 'Left' then
+                if actionType == 'BUTTON_PRESSED' then
+                    Str8upMenu.Cheats.noClipControls.left = true
+                elseif actionType == 'BUTTON_RELEASED' then
+                    Str8upMenu.Cheats.noClipControls.left = false
+                end
+            elseif actionName == 'Right' then
+                if actionType == 'BUTTON_PRESSED' then
+                    Str8upMenu.Cheats.noClipControls.right = true
+                elseif actionType == 'BUTTON_RELEASED' then
+                    Str8upMenu.Cheats.noClipControls.right = false
+                end
+            elseif actionName == 'Jump' then
+                if actionType == 'BUTTON_PRESSED' then
+                    Str8upMenu.Cheats.noClipControls.up = true
+                elseif actionType == 'BUTTON_RELEASED' then
+                    Str8upMenu.Cheats.noClipControls.up = false
+                end
+            elseif actionName == 'ToggleSprint' then
+                if actionType == 'BUTTON_PRESSED' then
+                    Str8upMenu.Cheats.noClipControls.down = true
+                elseif actionType == 'BUTTON_RELEASED' then
+                    Str8upMenu.Cheats.noClipControls.down = false
+                end
+
+            -- List menu controls
+            elseif actionName == 'Keyboard_0' then
+                if actionType == 'BUTTON_PRESSED' then
+                    Str8upMenu.drawWindow = not Str8upMenu.drawWindow
+                end
+            elseif actionName == 'up_button' then
+                if actionType == 'BUTTON_PRESSED' then
+                    Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "up")
+                end
+            elseif actionName == 'down_button' then
+                if actionType == 'BUTTON_PRESSED' then
+                    Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "down")
+                end
+            elseif actionName == 'left_button' then
+                if actionType == 'BUTTON_PRESSED' then
+                    Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "left")
+                end
+            elseif actionName == 'right_button' then
+                if actionType == 'BUTTON_PRESSED' then
+                    Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "right")
+                end
+            elseif actionName == 'UI_Apply' then
+                if actionType == 'BUTTON_PRESSED' then
+                    Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "select")
+                end
+            elseif actionName == 'Sprint' then
+                if actionType == 'BUTTON_PRESSED' then
+                    Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "back")
+                end
             end
 
-        -- List menu controls
-        elseif actionName == 'Keyboard_0' then
-            if actionType == 'BUTTON_PRESSED' then
-                Str8upMenu.drawWindow = not Str8upMenu.drawWindow
-            end
-        elseif actionName == 'up_button' then
-            if actionType == 'BUTTON_PRESSED' then
-                Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "up")
-            end
-        elseif actionName == 'down_button' then
-            if actionType == 'BUTTON_PRESSED' then
-                Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "down")
-            end
-        elseif actionName == 'left_button' then
-            if actionType == 'BUTTON_PRESSED' then
-                Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "left")
-            end
-        elseif actionName == 'right_button' then
-            if actionType == 'BUTTON_PRESSED' then
-                Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "right")
-            end
-        elseif actionName == 'UI_Apply' then
-            if actionType == 'BUTTON_PRESSED' then
-                Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "select")
-            end
-        elseif actionName == 'Sprint' then
-            if actionType == 'BUTTON_PRESSED' then
-                Str8upMenu.UI.ListMenuInteractions(Str8upMenu, "back")
-            end
-        end
-
+        end)
     end)
 
     registerHotkey("Str8up_Menu_Toggle_GUI", "Toggle GUI", function()
