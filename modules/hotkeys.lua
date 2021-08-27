@@ -9,7 +9,7 @@ function Str8upHotkeys.SetupHotkeys(Str8upMenu, registerForEvent, Observe, regis
     registerForEvent('onInit', function()
         ListenerAction = GetSingleton('gameinputScriptListenerAction')
 
-        Observe('PlayerPuppet', 'OnAction', function(action)
+        Observe('PlayerPuppet', 'OnAction', function(self, action)
 
             actionName = Game.NameToString(ListenerAction:GetName(action))
             actionType = ListenerAction:GetType(action).value
