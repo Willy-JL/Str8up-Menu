@@ -129,7 +129,7 @@ Str8upUI = {
             ["Time Warp"] = {
                 index = 2,
                 type = "section",
-                maxIndex = 7,
+                maxIndex = 8,
                 ["Hours"] = {
                     index = 1,
                     type = "int",
@@ -159,20 +159,24 @@ Str8upUI = {
                     type = "button",
                     callback = "Time.setTime"
                 },
-                ["Stop Time Cycle"] = {
+                ["_1"] = {
                     index = 5,
+                    type = "spacing"
+                },
+                ["Stop Time Cycle"] = {
+                    index = 6,
                     type = "toggle",
                     var = "Time.stopTime",
                     callback = "Time.updateStopTime"
                 },
                 ["SuperHot Mode"] = {
-                    index = 6,
+                    index = 7,
                     type = "toggle",
                     var = "Time.superHot",
                     callback = "Time.updateSuperHot"
                 },
                 ["Time Multiplier"] = {
-                    index = 7,
+                    index = 8,
                     type = "int",
                     var = "Time.timeMultiplier",
                     min = 1,
@@ -252,7 +256,7 @@ Str8upUI = {
                 ["Warps"] = {
                     index = 4,
                     type = "section",
-                    maxIndex = 5,
+                    maxIndex = 6,
                     ["Warp"] = {
                         index = 1,
                         type = "combo",
@@ -269,13 +273,17 @@ Str8upUI = {
                         type = "button",
                         objCallback = "Teleport.removeWarp"
                     },
-                    ["New Name"] = {
+                    ["_1"] = {
                         index = 4,
+                        type = "spacing"
+                    },
+                    ["New Name"] = {
+                        index = 5,
                         type = "text",
                         var = "Teleport.newWarpName"
                     },
                     ["Add Warp"] = {
-                        index = 5,
+                        index = 6,
                         type = "button",
                         objCallback = "Teleport.addWarp"
                     }
@@ -288,7 +296,7 @@ Str8upUI = {
                 ["Loadouts"] = {
                     index = 1,
                     type = "section",
-                    maxIndex = 5,
+                    maxIndex = 6,
                     ["Loadout"] = {
                         index = 1,
                         type = "combo",
@@ -305,13 +313,17 @@ Str8upUI = {
                         type = "button",
                         objCallback = "Player.removeLoadout"
                     },
-                    ["New Name"] = {
+                    ["_1"] = {
                         index = 4,
+                        type = "spacing"
+                    },
+                    ["New Name"] = {
+                        index = 5,
                         type = "text",
                         var = "Player.newLoadoutName"
                     },
                     ["Add Loadout"] = {
-                        index = 5,
+                        index = 6,
                         type = "button",
                         objCallback = "Player.addLoadout"
                     }
@@ -757,6 +769,17 @@ function Str8upUI.Button(name)
 end
 
 
+function Str8upUI.Spacing(name)
+
+    if Str8upUI.cursor.selected == name then
+        Str8upUI.DrawCursorRect(name)
+    end
+    color = { 0, 0, 0, 0 }
+    Str8upUI.ColoredText(" ", color)
+
+end
+
+
 function Str8upUI.CheckIgnoreValue(name)
 
     local ignored = { "index", "type", "maxIndex", "var", "vallback", "min", "max" }
@@ -919,6 +942,8 @@ function Str8upUI.Draw(Str8upMenu)
                             Str8upUI.Text(item[1], Str8upMenu[item[2].var])
                         elseif item[2].type == "button" then
                             Str8upUI.Button(item[1])
+                        elseif item[2].type == "spacing" then
+                            Str8upUI.Spacing(item[1])
                         end
                     end
                 elseif Str8upUI.menu[Str8upUI.cursor.submenu].type == "combo" then
