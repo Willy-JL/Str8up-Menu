@@ -954,7 +954,7 @@ function Str8upUI.Draw(Str8upMenu)
                     end
                     if #items == 0 then
                         color = { 0.69, 0.69, 0.69, 1 }
-                        Str8upUI.ColoredText(" No items available", color)
+                        Str8upUI.ColoredText(" There's nothing here..", color)
                     else
                         for _, name in pairs(items) do
                             Str8upUI.ComboItem(name)
