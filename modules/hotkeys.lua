@@ -4,7 +4,7 @@ Str8upHotkeys = {
 }
 
 
-function Str8upHotkeys.SetupHotkeys(Str8upMenu, registerForEvent, Observe, registerHotkey, registerInput)
+function Str8upHotkeys.SetupHotkeys(Str8upMenu)
 
     registerForEvent('onInit', function()
         ListenerAction = GetSingleton('gameinputScriptListenerAction')

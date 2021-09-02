@@ -83,7 +83,7 @@ Str8upMenu.Data.Load()
 
 
 -- Hotkeys
-Str8upMenu.Hotkeys.SetupHotkeys(Str8upMenu, registerForEvent, Observe, registerHotkey, registerInput)
+Str8upMenu.Hotkeys.SetupHotkeys(Str8upMenu)
 
 
 -- Events
