@@ -395,9 +395,9 @@ function Str8upUI.ListMenuInteractions(Str8upMenu, action)
         if action == "select" then
             if submenu.type == "combo" then
                 if submenu.itemsSubVar then
-                    Str8upMenu[submenu.var] = Str8upUI.GetIndexFromName(Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)], Str8upUI.cursor.selected) - 1
+                    Str8upMenu[submenu.var] = (Str8upUI.GetIndexFromName(Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)], Str8upUI.cursor.selected) - 1) or 0
                 else
-                    Str8upMenu[submenu.var] = Str8upUI.GetIndexFromName(Str8upMenu[submenu.items], Str8upUI.cursor.selected) - 1
+                    Str8upMenu[submenu.var] = (Str8upUI.GetIndexFromName(Str8upMenu[submenu.items], Str8upUI.cursor.selected) - 1) or 0
                 end
                 Str8upUI.cursor.selected = Str8upUI.cursor.submenu:sub(#Str8upUI.cursor.submenu - Str8upUI.cursor.submenu:reverse():find("%.")+2)
                 Str8upUI.cursor.submenu = Str8upUI.cursor.submenu:sub(1, #Str8upUI.cursor.submenu - Str8upUI.cursor.submenu:reverse():find("%."))
@@ -407,9 +407,9 @@ function Str8upUI.ListMenuInteractions(Str8upMenu, action)
             elseif item.type == "combo" then
                 Str8upUI.cursor.submenu = Str8upUI.cursor.submenu .. "." .. Str8upUI.cursor.selected
                 if item.itemsSubVar then
-                    Str8upUI.cursor.selected = Str8upMenu[item.items][Str8upMenu[item.itemsSubVar] + tonumber(item.itemsSubVarMod)][Str8upMenu[item.var]+1]
+                    Str8upUI.cursor.selected = Str8upMenu[item.items][Str8upMenu[item.itemsSubVar] + tonumber(item.itemsSubVarMod)][Str8upMenu[item.var]+1] or ""
                 else
-                    Str8upUI.cursor.selected = Str8upMenu[item.items][Str8upMenu[item.var]+1]
+                    Str8upUI.cursor.selected = Str8upMenu[item.items][Str8upMenu[item.var]+1] or ""
                 end
             elseif item.type == "button" then
                 if item.callback then
@@ -458,21 +458,23 @@ function Str8upUI.ListMenuInteractions(Str8upMenu, action)
                     Str8upUI.cursor.selected = Str8upUI.GetNameFromIndex(submenu, maxIndex)
                 end
             elseif submenu.type == "combo" then
-                if submenu.itemsSubVar then
-                    curIndex = Str8upUI.GetIndexFromName(Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)], Str8upUI.cursor.selected)
-                    maxIndex = #Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)]
-                    if curIndex > 1 then
-                        Str8upUI.cursor.selected = Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)][curIndex-1]
+                if #Str8upMenu[submenu.items] ~= 0 then
+                    if submenu.itemsSubVar then
+                        curIndex = Str8upUI.GetIndexFromName(Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)], Str8upUI.cursor.selected)
+                        maxIndex = #Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)]
+                        if curIndex > 1 then
+                            Str8upUI.cursor.selected = Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)][curIndex-1]
+                        else
+                            Str8upUI.cursor.selected = Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)][maxIndex]
+                        end
                     else
-                        Str8upUI.cursor.selected = Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)][maxIndex]
-                    end
-                else
-                    curIndex = Str8upUI.GetIndexFromName(Str8upMenu[submenu.items], Str8upUI.cursor.selected)
-                    maxIndex = #Str8upMenu[submenu.items]
-                    if curIndex > 1 then
-                        Str8upUI.cursor.selected = Str8upMenu[submenu.items][curIndex-1]
-                    else
-                        Str8upUI.cursor.selected = Str8upMenu[submenu.items][maxIndex]
+                        curIndex = Str8upUI.GetIndexFromName(Str8upMenu[submenu.items], Str8upUI.cursor.selected)
+                        maxIndex = #Str8upMenu[submenu.items]
+                        if curIndex > 1 then
+                            Str8upUI.cursor.selected = Str8upMenu[submenu.items][curIndex-1]
+                        else
+                            Str8upUI.cursor.selected = Str8upMenu[submenu.items][maxIndex]
+                        end
                     end
                 end
             end
@@ -486,21 +488,23 @@ function Str8upUI.ListMenuInteractions(Str8upMenu, action)
                     Str8upUI.cursor.selected = Str8upUI.GetNameFromIndex(submenu, 1)
                 end
             elseif submenu.type == "combo" then
-                if submenu.itemsSubVar then
-                    curIndex = Str8upUI.GetIndexFromName(Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)], Str8upUI.cursor.selected)
-                    maxIndex = #Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)]
-                    if curIndex < maxIndex then
-                        Str8upUI.cursor.selected = Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)][curIndex+1]
+                if #Str8upMenu[submenu.items] ~= 0 then
+                    if submenu.itemsSubVar then
+                        curIndex = Str8upUI.GetIndexFromName(Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)], Str8upUI.cursor.selected)
+                        maxIndex = #Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)]
+                        if curIndex < maxIndex then
+                            Str8upUI.cursor.selected = Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)][curIndex+1]
+                        else
+                            Str8upUI.cursor.selected = Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)][1]
+                        end
                     else
-                        Str8upUI.cursor.selected = Str8upMenu[submenu.items][Str8upMenu[submenu.itemsSubVar] + tonumber(submenu.itemsSubVarMod)][1]
-                    end
-                else
-                    curIndex = Str8upUI.GetIndexFromName(Str8upMenu[submenu.items], Str8upUI.cursor.selected)
-                    maxIndex = #Str8upMenu[submenu.items]
-                    if curIndex < maxIndex then
-                        Str8upUI.cursor.selected = Str8upMenu[submenu.items][curIndex+1]
-                    else
-                        Str8upUI.cursor.selected = Str8upMenu[submenu.items][1]
+                        curIndex = Str8upUI.GetIndexFromName(Str8upMenu[submenu.items], Str8upUI.cursor.selected)
+                        maxIndex = #Str8upMenu[submenu.items]
+                        if curIndex < maxIndex then
+                            Str8upUI.cursor.selected = Str8upMenu[submenu.items][curIndex+1]
+                        else
+                            Str8upUI.cursor.selected = Str8upMenu[submenu.items][1]
+                        end
                     end
                 end
             end
@@ -515,17 +519,19 @@ function Str8upUI.ListMenuInteractions(Str8upMenu, action)
                     Str8upMenu[item.callback]()
                 end
             elseif item.type == "combo" then
-                if Str8upMenu[item.var] > 0 then
-                    Str8upMenu[item.var] = Str8upMenu[item.var] - 1
-                else
-                    if item.itemsSubVar then
-                        Str8upMenu[item.var] = #Str8upMenu[item.items][Str8upMenu[item.itemsSubVar] + tonumber(item.itemsSubVarMod)] - 1
+                if #Str8upMenu[item.items] ~= 0 then
+                    if Str8upMenu[item.var] > 0 then
+                        Str8upMenu[item.var] = Str8upMenu[item.var] - 1
                     else
-                        Str8upMenu[item.var] = #Str8upMenu[item.items] - 1
+                        if item.itemsSubVar then
+                            Str8upMenu[item.var] = #Str8upMenu[item.items][Str8upMenu[item.itemsSubVar] + tonumber(item.itemsSubVarMod)] - 1
+                        else
+                            Str8upMenu[item.var] = #Str8upMenu[item.items] - 1
+                        end
                     end
-                end
-                if item.callback then
-                    Str8upMenu[item.callback]()
+                    if item.callback then
+                        Str8upMenu[item.callback]()
+                    end
                 end
             end
         elseif action == "right" then
@@ -539,23 +545,25 @@ function Str8upUI.ListMenuInteractions(Str8upMenu, action)
                     Str8upMenu[item.callback]()
                 end
             elseif item.type == "combo" then
-                if item.itemsSubVar then
-                    if Str8upMenu[item.var] < (#Str8upMenu[item.items][Str8upMenu[item.itemsSubVar] + tonumber(item.itemsSubVarMod)] - 1) then
-                        Str8upMenu[item.var] = Str8upMenu[item.var] + 1
+                if #Str8upMenu[item.items] ~= 0 then
+                    if item.itemsSubVar then
+                        if Str8upMenu[item.var] < (#Str8upMenu[item.items][Str8upMenu[item.itemsSubVar] + tonumber(item.itemsSubVarMod)] - 1) then
+                            Str8upMenu[item.var] = Str8upMenu[item.var] + 1
+                        else
+                            Str8upMenu[item.var] = 0
+                        end
+                        if item.callback then
+                            Str8upMenu[item.callback]()
+                        end
                     else
-                        Str8upMenu[item.var] = 0
-                    end
-                    if item.callback then
-                        Str8upMenu[item.callback]()
-                    end
-                else
-                    if Str8upMenu[item.var] < (#Str8upMenu[item.items] - 1) then
-                        Str8upMenu[item.var] = Str8upMenu[item.var] + 1
-                    else
-                        Str8upMenu[item.var] = 0
-                    end
-                    if item.callback then
-                        Str8upMenu[item.callback]()
+                        if Str8upMenu[item.var] < (#Str8upMenu[item.items] - 1) then
+                            Str8upMenu[item.var] = Str8upMenu[item.var] + 1
+                        else
+                            Str8upMenu[item.var] = 0
+                        end
+                        if item.callback then
+                            Str8upMenu[item.callback]()
+                        end
                     end
                 end
             end
@@ -673,15 +681,18 @@ function Str8upUI.Combo(Str8upMenu, item)
             if ( Str8upMenu[item[2].var] + 1) > #Str8upMenu[item[2].items][Str8upMenu[item[2].itemsSubVar] + tonumber(item[2].itemsSubVarMod)] then
                 Str8upMenu[item[2].var] = #Str8upMenu[item[2].items][Str8upMenu[item[2].itemsSubVar] + tonumber(item[2].itemsSubVarMod)] -1
             end
-            value = Str8upMenu[item[2].items][Str8upMenu[item[2].itemsSubVar] + tonumber(item[2].itemsSubVarMod)][Str8upMenu[item[2].var]+1]
+            value = Str8upMenu[item[2].items][Str8upMenu[item[2].itemsSubVar] + tonumber(item[2].itemsSubVarMod)][Str8upMenu[item[2].var]+1] or ""
         else
             if ( Str8upMenu[item[2].var] + 1) > #Str8upMenu[item[2].items] then
                 Str8upMenu[item[2].var] = #Str8upMenu[item[2].items] -1
             end
-            value = Str8upMenu[item[2].items][Str8upMenu[item[2].var]+1]
+            value = Str8upMenu[item[2].items][Str8upMenu[item[2].var]+1] or ""
         end
         if #value > 11 then
             value = value:sub(1, 8) .. "..."
+        end
+        if value == "" then
+            value = "   "
         end
         xOffset = ImGui.GetWindowWidth() - ImGui.CalcTextSize("<" .. value .. ">  ")
         ImGui.SameLine(xOffset)
@@ -693,15 +704,18 @@ function Str8upUI.Combo(Str8upMenu, item)
             if ( Str8upMenu[item[2].var] + 1) > #Str8upMenu[item[2].items][Str8upMenu[item[2].itemsSubVar] + tonumber(item[2].itemsSubVarMod)] then
                 Str8upMenu[item[2].var] = #Str8upMenu[item[2].items][Str8upMenu[item[2].itemsSubVar] + tonumber(item[2].itemsSubVarMod)] -1
             end
-            value = Str8upMenu[item[2].items][Str8upMenu[item[2].itemsSubVar] + tonumber(item[2].itemsSubVarMod)][Str8upMenu[item[2].var]+1]
+            value = Str8upMenu[item[2].items][Str8upMenu[item[2].itemsSubVar] + tonumber(item[2].itemsSubVarMod)][Str8upMenu[item[2].var]+1] or ""
         else
             if ( Str8upMenu[item[2].var] + 1) > #Str8upMenu[item[2].items] then
                 Str8upMenu[item[2].var] = #Str8upMenu[item[2].items] -1
             end
-            value = Str8upMenu[item[2].items][Str8upMenu[item[2].var]+1]
+            value = Str8upMenu[item[2].items][Str8upMenu[item[2].var]+1] or ""
         end
         if #value > 13 then
             value = value:sub(1, 10) .. "..."
+        end
+        if value == "" then
+            value = "   "
         end
         xOffset = ImGui.GetWindowWidth() - ImGui.CalcTextSize(value .. "  ")
         ImGui.SameLine(xOffset)
@@ -719,13 +733,13 @@ function Str8upUI.Text(name, value)
     else
         color = { 0.69, 0.69, 0.69, 1 }
     end
-    if #value > 13 then
-        value = value:sub(1, 10) .. "..."
+    if #value > 11 then
+        value = value:sub(1, 8) .. "..."
     end
     Str8upUI.ColoredText(" " .. name, color)
-    xOffset = ImGui.GetWindowWidth() - ImGui.CalcTextSize(value .. "  ")
+    xOffset = ImGui.GetWindowWidth() - ImGui.CalcTextSize('"' .. value .. '"' .. "  ")
     ImGui.SameLine(xOffset)
-    Str8upUI.ColoredText(value, color)
+    Str8upUI.ColoredText('"' .. value .. '"', color)
 
 end
 
@@ -913,8 +927,13 @@ function Str8upUI.Draw(Str8upMenu)
                     else
                         items = Str8upMenu[Str8upUI.menu[Str8upUI.cursor.submenu].items]
                     end
-                    for _, name in pairs(items) do
-                        Str8upUI.ComboItem(name)
+                    if #items == 0 then
+                        color = { 0.69, 0.69, 0.69, 1 }
+                        Str8upUI.ColoredText(" No items available", color)
+                    else
+                        for _, name in pairs(items) do
+                            Str8upUI.ComboItem(name)
+                        end
                     end
                 end
                 ImGui.Spacing()

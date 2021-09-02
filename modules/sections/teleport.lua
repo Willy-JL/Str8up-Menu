@@ -75,11 +75,14 @@ end
 
 function Str8upTeleport.removeWarp(Str8upMenu)
 
+    if #Str8upMenu.Data.warpsNames == 0 then
+        return
+    end
     Str8upMenu.Data.json.warps[Str8upMenu.Data.warpsNames[Str8upTeleport.warpSelection+1]] = nil
     Str8upMenu.Data.Save()
     table.remove(Str8upMenu.Data.warpsNames, Str8upTeleport.warpSelection+1)
     if Str8upTeleport.warpSelection+1 > #Str8upMenu.Data.warpsNames then
-        Str8upTeleport.warpSelection = #Str8upMenu.Data.warpsNames - 1
+        Str8upTeleport.warpSelection = math.max(#Str8upMenu.Data.warpsNames - 1, 0)
     end
 
 end
@@ -87,6 +90,9 @@ end
 
 function Str8upTeleport.tpToWarp(Str8upMenu)
 
+    if #Str8upMenu.Data.warpsNames == 0 then
+        return
+    end
     tpTo = Str8upMenu.Data.json.warps[Str8upMenu.Data.warpsNames[Str8upTeleport.warpSelection+1]]
     Game.GetTeleportationFacility():Teleport(Game.GetPlayer(), Vector4.new(tpTo.x, tpTo.y, tpTo.z, tpTo.w) , EulerAngles.new(0,0,tpTo.yaw))
 

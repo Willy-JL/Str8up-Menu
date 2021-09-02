@@ -110,11 +110,14 @@ end
 
 function Str8upUtilities.removeLoadout(Str8upMenu)
 
+    if #Str8upMenu.Data.loadoutNames == 0 then
+        return
+    end
     Str8upMenu.Data.json.loadouts[Str8upMenu.Data.loadoutNames[Str8upUtilities.loadoutSelection+1]] = nil
     Str8upMenu.Data.Save()
     table.remove(Str8upMenu.Data.loadoutNames, Str8upUtilities.loadoutSelection+1)
     if Str8upUtilities.loadoutSelection+1 > #Str8upMenu.Data.loadoutNames then
-        Str8upUtilities.loadoutSelection = #Str8upMenu.Data.loadoutNames - 1
+        Str8upUtilities.loadoutSelection = math.max(#Str8upMenu.Data.loadoutNames - 1, 0)
     end
 
 end
@@ -122,6 +125,9 @@ end
 
 function Str8upUtilities.loadLoadout(Str8upMenu)
 
+    if #Str8upMenu.Data.loadoutNames == 0 then
+        return
+    end
     player = Game.GetPlayer()
     ssc = Game.GetScriptableSystemsContainer()
     ts = Game.GetTransactionSystem()
