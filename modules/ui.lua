@@ -284,19 +284,50 @@ Str8upUI = {
             ["Player"] = {
                 index = 5,
                 type = "section",
-                maxIndex = 3,
-                ["Undress"] = {
+                maxIndex = 4,
+                ["Loadouts"] = {
                     index = 1,
+                    type = "section",
+                    maxIndex = 5,
+                    ["Loadout"] = {
+                        index = 1,
+                        type = "combo",
+                        var = "Player.loadoutSelection",
+                        items = "Data.loadoutNames"
+                    },
+                    ["Load"] = {
+                        index = 2,
+                        type = "button",
+                        objCallback = "Player.loadLoadout"
+                    },
+                    ["Remove"] = {
+                        index = 3,
+                        type = "button",
+                        objCallback = "Player.removeLoadout"
+                    },
+                    ["New Name"] = {
+                        index = 4,
+                        type = "text",
+                        var = "Player.newLoadoutName"
+                    },
+                    ["Add Loadout"] = {
+                        index = 5,
+                        type = "button",
+                        objCallback = "Player.addLoadout"
+                    }
+                },
+                ["Undress"] = {
+                    index = 2,
                     type = "button",
                     callback = "Player.undress"
                 },
                 ["Toggle Bra"] = {
-                    index = 2,
+                    index = 3,
                     type = "button",
                     callback = "Player.toggleBra"
                 },
                 ["Toggle Panties"] = {
-                    index = 3,
+                    index = 4,
                     type = "button",
                     callback = "Player.togglePanties"
                 }
@@ -304,7 +335,7 @@ Str8upUI = {
             ["Utilities"] = {
                 index = 6,
                 type = "section",
-                maxIndex = 4,
+                maxIndex = 3,
                 ["Toggle Quest for Equip Items "] = {
                     index = 1,
                     type = "button",
@@ -319,37 +350,6 @@ Str8upUI = {
                     index = 3,
                     type = "button",
                     callback = "Utilities.cancelFallDamage"
-                },
-                ["Loadouts"] = {
-                    index = 4,
-                    type = "section",
-                    maxIndex = 5,
-                    ["Loadout"] = {
-                        index = 1,
-                        type = "combo",
-                        var = "Utilities.loadoutSelection",
-                        items = "Data.loadoutNames"
-                    },
-                    ["Load"] = {
-                        index = 2,
-                        type = "button",
-                        objCallback = "Utilities.loadLoadout"
-                    },
-                    ["Remove"] = {
-                        index = 3,
-                        type = "button",
-                        objCallback = "Utilities.removeLoadout"
-                    },
-                    ["New Name"] = {
-                        index = 4,
-                        type = "text",
-                        var = "Utilities.newLoadoutName"
-                    },
-                    ["Add Loadout"] = {
-                        index = 5,
-                        type = "button",
-                        objCallback = "Utilities.addLoadout"
-                    }
                 }
             },
             ["Settings"] = {
@@ -1120,7 +1120,7 @@ function Str8upUI.Draw(Str8upMenu)
                     end
 
                     if ImGui.BeginTabItem("Player") then
-                        ImGui.SetWindowSize(430, 81)
+                        ImGui.SetWindowSize(430, 131)
                         ImGui.Spacing()
 
                         if ImGui.Button("Undress", 133, 19) then
@@ -1135,11 +1135,31 @@ function Str8upUI.Draw(Str8upMenu)
                             Str8upMenu.Player.togglePanties()
                         end
 
+                        ImGui.Spacing()
+                        ImGui.Text("Custom Loadouts")
+                        ImGui.SameLine(166)
+                        ImGui.PushItemWidth(210)
+                        Str8upMenu.Player.newLoadoutName = ImGui.InputText("##New Loadout Name", Str8upMenu.Player.newLoadoutName, 100)
+                        ImGui.SameLine(380)
+                        if ImGui.Button("Add##Loadout", 42, 19) then
+                            Str8upMenu.Player.addLoadout(Str8upMenu)
+                        end
+                        if ImGui.Button("Remove##Loadout") then
+                            Str8upMenu.Player.removeLoadout(Str8upMenu)
+                        end
+                        ImGui.SameLine(62)
+                        ImGui.PushItemWidth(250)
+                        Str8upMenu.Player.loadoutSelection = ImGui.Combo("##Custom Loadout Selection", Str8upMenu.Player.loadoutSelection, Str8upMenu.Data.loadoutNames, #Str8upMenu.Data.loadoutNames)
+                        ImGui.SameLine(316)
+                        if ImGui.Button("Load", 106, 19) then
+                            Str8upMenu.Player.loadLoadout(Str8upMenu)
+                        end
+
                         ImGui.EndTabItem()
                     end
 
                     if ImGui.BeginTabItem("Utils") then
-                        ImGui.SetWindowSize(430, 154)
+                        ImGui.SetWindowSize(430, 104)
                         ImGui.Spacing()
 
                         if ImGui.Button("Toggle Quest Item (No Sell / Dismantle) for Equipped Items") then
@@ -1153,26 +1173,6 @@ function Str8upUI.Draw(Str8upMenu)
                         ImGui.SameLine(217)
                         if ImGui.Button("Cancel Fall Dmg", 205, 19) then
                             Str8upMenu.Utilities.cancelFallDamage()
-                        end
-
-                        ImGui.Spacing()
-                        ImGui.Text("Custom Loadouts")
-                        ImGui.SameLine(166)
-                        ImGui.PushItemWidth(210)
-                        Str8upMenu.Utilities.newLoadoutName = ImGui.InputText("##New Loadout Name", Str8upMenu.Utilities.newLoadoutName, 100)
-                        ImGui.SameLine(380)
-                        if ImGui.Button("Add##Loadout", 42, 19) then
-                            Str8upMenu.Utilities.addLoadout(Str8upMenu)
-                        end
-                        if ImGui.Button("Remove##Loadout") then
-                            Str8upMenu.Utilities.removeLoadout(Str8upMenu)
-                        end
-                        ImGui.SameLine(62)
-                        ImGui.PushItemWidth(250)
-                        Str8upMenu.Utilities.loadoutSelection = ImGui.Combo("##Custom Loadout Selection", Str8upMenu.Utilities.loadoutSelection, Str8upMenu.Data.loadoutNames, #Str8upMenu.Data.loadoutNames)
-                        ImGui.SameLine(316)
-                        if ImGui.Button("Load", 106, 19) then
-                            Str8upMenu.Utilities.loadLoadout(Str8upMenu)
                         end
 
                         ImGui.EndTabItem()
