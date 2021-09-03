@@ -45,7 +45,7 @@ function Str8upUtilities.untrackQuest()
 end
 
 
-function Str8upUtilities.cancelFallDamage()
+function Str8upUtilities.stopFall()
 
     Game.GetTeleportationFacility():Teleport(Game.GetPlayer(), Game.GetPlayer():GetWorldPosition() , EulerAngles.new(0,0,Game.GetPlayer():GetWorldYaw()))
 

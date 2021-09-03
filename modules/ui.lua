@@ -358,10 +358,10 @@ Str8upUI = {
                     type = "button",
                     callback = "Utilities.untrackQuest"
                 },
-                ["Cancel Fall Dmg"] = {
+                ["Stop Fall"] = {
                     index = 3,
                     type = "button",
-                    callback = "Utilities.cancelFallDamage"
+                    callback = "Utilities.stopFall"
                 }
             },
             ["Settings"] = {
@@ -1196,8 +1196,8 @@ function Str8upUI.Draw(Str8upMenu)
                         end
 
                         ImGui.SameLine(217)
-                        if ImGui.Button("Cancel Fall Dmg", 205, 19) then
-                            Str8upMenu.Utilities.cancelFallDamage()
+                        if ImGui.Button("Stop Fall", 205, 19) then
+                            Str8upMenu.Utilities.stopFall()
                         end
 
                         ImGui.EndTabItem()

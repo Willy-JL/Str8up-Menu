@@ -54,7 +54,7 @@ function Str8upOnUpdate.Run(Str8upMenu, deltaTime)
             pos = Game.GetPlayer():GetWorldPosition()
             closeToGround = not Game.GetSenseManager():IsPositionVisible(pos, Vector4.new(pos.x, pos.y, pos.z + (vel * deltaTime) - 1, pos.w))
             if closeToGround then
-                Str8upMenu.Utilities.cancelFallDamage()
+                Str8upMenu.Utilities.stopFall()
             end
         end
     end

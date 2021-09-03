@@ -176,8 +176,8 @@ function Str8upHotkeys.SetupHotkeys(Str8upMenu)
         Str8upMenu.Utilities.untrackQuest()
     end)
 
-    registerHotkey("Str8up_Menu_Cancel_Fall_Dmg", "Cancel Fall Dmg", function()
-        Str8upMenu.Utilities.cancelFallDamage()
+    registerHotkey("Str8up_Menu_Stop_Fall", "Stop Fall", function()
+        Str8upMenu.Utilities.stopFall()
     end)
 
 end
