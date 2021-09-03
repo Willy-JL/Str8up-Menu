@@ -21,9 +21,9 @@ end
 function Str8upTime.updateStopTimeValue()
 
     if Str8upTime.stopTime then
-      times = Game.GetTimeSystem()
+        times = Game.GetTimeSystem()
         Str8upTime.stopTimeValue = math.floor(times:GetGameTimeStamp())
-      end
+    end
 
 end
 
@@ -33,10 +33,10 @@ function Str8upTime.updateSuperHot()
     if Str8upTime.superHot then
         Game.GetTimeSystem():SetIgnoreTimeDilationOnLocalPlayerZero(true)
         Game.SetTimeDilation(0.0000000000001)
-      else
+    else
         Game.GetTimeSystem():SetIgnoreTimeDilationOnLocalPlayerZero(false)
         Game.SetTimeDilation(0)
-      end
+    end
 
 end
 
