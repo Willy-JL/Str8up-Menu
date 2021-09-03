@@ -39,7 +39,7 @@ end
 
 Str8upMenu = {
     description = "Str8up Menu",
-    version = "2.4h2",
+    version = "2.4h3",
     rootPath =  getCWD("Str8up Menu"),
     drawWindow = false,
     oldDrawWindow = false
