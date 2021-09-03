@@ -49,11 +49,13 @@ function Str8upOnUpdate.Run(Str8upMenu, deltaTime)
     end
 
     if Str8upMenu.Cheats.noFall then
-        pos = Game.GetPlayer():GetWorldPosition()
-        closeToGround = not Game.GetSenseManager():IsPositionVisible(pos, Vector4.new(pos.x, pos.y, pos.z - 20, pos.w))
         vel = Game.GetPlayer():GetVelocity().z
-        if closeToGround and vel < -15 then
-            Str8upMenu.Utilities.cancelFallDamage()
+        if vel < -15 then
+            pos = Game.GetPlayer():GetWorldPosition()
+            closeToGround = not Game.GetSenseManager():IsPositionVisible(pos, Vector4.new(pos.x, pos.y, pos.z + (vel * deltaTime) - 1, pos.w))
+            if closeToGround then
+                Str8upMenu.Utilities.cancelFallDamage()
+            end
         end
     end
 
