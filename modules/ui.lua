@@ -167,7 +167,7 @@ Str8upUI = {
                     index = 6,
                     type = "toggle",
                     var = "Time.stopTime",
-                    callback = "Time.updateStopTime"
+                    callback = "Time.updateStopTimeValue"
                 },
                 ["SuperHot Mode"] = {
                     index = 7,
@@ -1053,7 +1053,7 @@ function Str8upUI.Draw(Str8upMenu)
 
                         Str8upMenu.Time.stopTime, stopTimeChanged = ImGui.Checkbox("Stop Time Cycle", Str8upMenu.Time.stopTime)
                         if stopTimeChanged then
-                            Str8upMenu.Time.updateStopTime()
+                            Str8upMenu.Time.updateStopTimeValue()
                         end
 
                         Str8upMenu.Time.superHot, superHotChanged = ImGui.Checkbox("SuperHot Mode (Time Freeze)", Str8upMenu.Time.superHot)

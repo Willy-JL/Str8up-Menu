@@ -5,6 +5,7 @@ Str8upTime = {
     m = 0,
     s = 0,
     stopTime = false,
+    stopTimeValue = false,
     superHot = false,
     timeMultiplier = 1
 }
@@ -17,12 +18,11 @@ function Str8upTime.setTime()
 end
 
 
-function Str8upTime.updateStopTime()
+function Str8upTime.updateStopTimeValue()
 
     if Str8upTime.stopTime then
-        Game.GetTimeSystem():SetPausedState(true, CName.new("Str8upMenu"))
-      else
-        Game.GetTimeSystem():SetPausedState(false, CName.new("Str8upMenu"))
+      times = Game.GetTimeSystem()
+        Str8upTime.stopTimeValue = math.floor(times:GetGameTimeStamp())
       end
 
 end

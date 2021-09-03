@@ -148,7 +148,7 @@ function Str8upHotkeys.SetupHotkeys(Str8upMenu)
 
     registerHotkey("Str8up_Menu_Toggle_Stop_Time", "Toggle Stop Time", function()
         Str8upMenu.Time.stopTime = not Str8upMenu.Time.stopTime
-        Str8upMenu.Time.updateStopTime()
+        Str8upMenu.Time.updateStopTimeValue()
     end)
 
     registerHotkey("Str8up_Menu_Toggle_SuperHot_Mode", "Toggle SuperHot Mode", function()

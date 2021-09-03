@@ -2,9 +2,8 @@
 Str8upOnUpdate = {
     description = "Str8up OnUpdate Component",
     timers = {
-        t025s = 0,
-        t2s = 0,
-        t5s = 0
+        t0125s = 0,
+        t2s = 0
     }
 }
 
@@ -18,13 +17,16 @@ function Str8upOnUpdate.Run(Str8upMenu, deltaTime)
         end
     end
 
-    Str8upOnUpdate.timers.t025s = Str8upOnUpdate.timers.t025s + deltaTime
-    if Str8upOnUpdate.timers.t025s > 0.25 then
-        Str8upOnUpdate.timers.t025s = Str8upOnUpdate.timers.t025s - 0.25
-        if Str8upMenu.Time.timeMultiplier ~= 1 then
+    Str8upOnUpdate.timers.t0125s = Str8upOnUpdate.timers.t0125s + deltaTime
+    if Str8upOnUpdate.timers.t0125s > 0.125 then
+        Str8upOnUpdate.timers.t0125s = Str8upOnUpdate.timers.t0125s - 0.125
+        if Str8upMenu.Time.stopTime then
+            times = Game.GetTimeSystem()
+            times:SetGameTimeBySeconds(Str8upMenu.Time.stopTimeValue)
+        elseif Str8upMenu.Time.timeMultiplier ~= 1 then
             times = Game.GetTimeSystem()
             if not times:IsPausedState() then
-                times:SetGameTimeBySeconds(math.floor(times:GetGameTimeStamp())+((Str8upMenu.Time.timeMultiplier-1)*2))
+                times:SetGameTimeBySeconds(math.floor(times:GetGameTimeStamp())+((Str8upMenu.Time.timeMultiplier-1)))
             end
         end
     end
@@ -37,14 +39,6 @@ function Str8upOnUpdate.Run(Str8upMenu, deltaTime)
         end
         if Str8upMenu.Cheats.godMode then
             Str8upMenu.Cheats.updateGodMode()
-        end
-    end
-
-    Str8upOnUpdate.timers.t5s = Str8upOnUpdate.timers.t5s + deltaTime
-    if Str8upOnUpdate.timers.t5s > 5 then
-        Str8upOnUpdate.timers.t5s = Str8upOnUpdate.timers.t5s - 5
-        if Str8upMenu.Time.stopTime then
-            Str8upMenu.Time.updateStopTime()
         end
     end
 
