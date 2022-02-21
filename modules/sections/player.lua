@@ -133,7 +133,7 @@ function Str8upPlayer.loadLoadout(Str8upMenu)
     es = ssc:Get(CName.new('EquipmentSystem'))
     espd = es:GetPlayerData(player)
     espd['GetItemInEquipSlot2'] = espd['GetItemInEquipSlot;gamedataEquipmentAreaInt32']
-    espd['EquipItem2'] = espd['EquipItem;ItemIDInt32BoolBoolBool']
+    espd['EquipItem2'] = espd['EquipItem;ItemIDInt32BoolBool']
     espd['UnequipItem2'] = espd['UnequipItem;ItemID']
     local slots = {
         Face = 1,
@@ -152,7 +152,7 @@ function Str8upPlayer.loadLoadout(Str8upMenu)
                 if Str8upMenu.Data.json.loadouts[Str8upMenu.Data.loadoutNames[Str8upPlayer.loadoutSelection+1]][k][tostring(i-1)] then
                     item = Str8upMenu.Data.json.loadouts[Str8upMenu.Data.loadoutNames[Str8upPlayer.loadoutSelection+1]][k][tostring(i-1)]
                     itemid = ItemID.new(TweakDBID.new(item.hash, item.length), item.seed)
-                    espd:EquipItem2(itemid, i-1, false, false, true)
+                    espd:EquipItem2(itemid, i-1, false, true)
                 end
             end
         end
